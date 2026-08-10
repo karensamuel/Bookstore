@@ -21,8 +21,7 @@ fun SearchBar(
         value = query,
         onValueChange = onQueryChange,
         modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .fillMaxWidth(),
         placeholder = {
             Text("Search books...")
         },

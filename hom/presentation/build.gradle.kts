@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.presentation"
+    namespace = "com.example.hom.presentation"
 
     compileSdk {
         version = release(37)
