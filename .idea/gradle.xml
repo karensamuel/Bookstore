@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="CHOOSE_PER_TEST" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/domain" />
+            <option value="$PROJECT_DIR$/core/presentation" />
+            <option value="$PROJECT_DIR$/hom" />
+            <option value="$PROJECT_DIR$/hom/domain" />
+            <option value="$PROJECT_DIR$/hom/presentation" />
+            <option value="$PROJECT_DIR$/info" />
+            <option value="$PROJECT_DIR$/info/domain" />
+            <option value="$PROJECT_DIR$/searches" />
+            <option value="$PROJECT_DIR$/searches/domain" />
+            <option value="$PROJECT_DIR$/searches/presentation" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

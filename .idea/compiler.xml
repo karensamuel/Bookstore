@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="11">
+      <module name="BookStore.bookinfo.domain" target="21" />
+      <module name="BookStore.bookly.domain" target="21" />
+      <module name="BookStore.homee" target="21" />
+      <module name="BookStore.search.domain" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
