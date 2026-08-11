@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,10 +23,9 @@ import androidx.navigation.compose.rememberNavController
 
 
 import com.example.bookstore.ui.theme.BookStoreTheme
-import com.example.core.domain.model.Book
 import com.example.info.presentation.components.BookDetailsScreen
-import com.example.presentation.BookList
-import com.example.presentation.SearchBar
+import com.example.presentation.HomeRoute
+import com.example.presentation.components.SearchBar
 
 class MainActivity : ComponentActivity() {
 
@@ -55,41 +52,18 @@ fun NavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "bookinfo"
+        startDestination = "home"
     ) {
 
         composable("home") {
-            HomeScreen()
+            HomeRoute()
         }
         composable("bookinfo") {
             BookInfo()
         }
     }
 }
-@Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
 
-    var query by remember { mutableStateOf("") }
-
-    Column {
-        SearchBar(
-            query = query,
-            onQueryChange = { query = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        )
-
-            BookList(
-                books = books,
-                modifier = Modifier
-                    .fillMaxSize()
-
-            )
-
-
-    }
-}
 @Composable
 fun BookInfo(modifier: Modifier = Modifier) {
     BookDetailsScreen( book = books[0])

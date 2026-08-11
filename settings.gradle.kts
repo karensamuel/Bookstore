@@ -31,6 +31,4 @@ include(":hom:presentation")
 
 
 include(":info:domain")
-include(":searches:domain")
-include(":searches:presentation")
 include(":info:presentation")

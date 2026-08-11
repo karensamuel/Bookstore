@@ -54,6 +54,6 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":hom:domain"))
     implementation(project(":hom:presentation"))
-    implementation(project(":searches:presentation"))
     implementation(project(":info:presentation"))
+
 }
