@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 
 import com.example.bookstore.ui.theme.BookStoreTheme
 import com.example.core.domain.model.Book
+import com.example.info.presentation.components.BookDetailsScreen
 import com.example.presentation.BookList
 import com.example.presentation.SearchBar
 
@@ -54,7 +55,7 @@ fun NavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "bookinfo"
     ) {
 
         composable("home") {
@@ -91,9 +92,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 }
 @Composable
 fun BookInfo(modifier: Modifier = Modifier) {
-    Text(
-        text = "book info screen",
-        modifier = modifier
-    )
+    BookDetailsScreen( book = books[0])
 
 }

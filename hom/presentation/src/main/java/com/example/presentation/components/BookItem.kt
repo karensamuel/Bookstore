@@ -1,10 +1,5 @@
 package com.example.presentation.components
 
-import androidx.compose.material3.Card
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.core.domain.model.Book
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,12 +7,16 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.core.domain.model.Book
+
 @Composable
 fun BookItem(book: Book) {
     Card(
@@ -45,7 +44,7 @@ fun BookItem(book: Book) {
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center
             ) {
-                if (book.coverUrl.isEmpty()) {
+                if (book.coverUrl.isNullOrEmpty()) {
                     Text(
                         text = "📖",
                         style = MaterialTheme.typography.headlineMedium
@@ -70,7 +69,7 @@ fun BookItem(book: Book) {
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = book.author,
+                    text = book.authors.firstOrNull() ?: "Unknown author",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -86,11 +85,18 @@ fun BookItem(book: Book) {
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
-private fun BookItemPreview( ) {
-    val book = Book("1", "Title", "Author", "coverUrl")
+private fun BookItemPreview() {
+    val book = Book(
+        id = "1",
+        title = "The Great Gatsby",
+        authors = listOf("F. Scott Fitzgerald"),
+        coverUrl = null,
+        firstPublishYear = 1925,
+        editionCount = 10
+    )
+
     BookItem(book)
-
-
 }
