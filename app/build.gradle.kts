@@ -52,8 +52,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(project(":core:domain"))
-    implementation(project(":hom:domain"))
-    implementation(project(":hom:presentation"))
-    implementation(project(":info:presentation"))
+    implementation(project(":book:domain"))
+    implementation(project(":book:presentation"))
+    implementation(project(":bookinfo:presentation"))
 
 }

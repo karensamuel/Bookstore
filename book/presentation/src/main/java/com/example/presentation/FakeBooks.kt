@@ -1,6 +1,7 @@
-package com.example.bookstore
+package com.example.presentation
 
 import com.example.domain.repo.modles.Book
+
 
 val books = listOf(
     Book(
@@ -15,6 +16,7 @@ val books = listOf(
         title = "1984",
         authors = listOf("George Orwell"),
         coverUrl = null,
+
     ),
     Book(
         id = "3",

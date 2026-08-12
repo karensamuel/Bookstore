@@ -26,9 +26,9 @@ rootProject.name = "BookStore"
 include(":app")
 include(":core:domain")
 include(":core:presentation")
-include(":hom:domain")
-include(":hom:presentation")
+include(":book:domain")
+include(":book:presentation")
 
 
-include(":info:domain")
-include(":info:presentation")
+include(":bookinfo:domain")
+include(":bookinfo:presentation")

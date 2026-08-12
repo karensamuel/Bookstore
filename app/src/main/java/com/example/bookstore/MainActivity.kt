@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 
 
 import com.example.bookstore.ui.theme.BookStoreTheme
-import com.example.info.presentation.components.BookDetailsScreen
+import com.example.bookinfo.presentation.components.BookDetailsScreen
 import com.example.presentation.HomeRoute
 import com.example.presentation.components.SearchBar
 
@@ -65,7 +65,7 @@ fun NavGraph(navController: NavHostController) {
 }
 
 @Composable
-fun BookInfo(modifier: Modifier = Modifier) {
-    BookDetailsScreen( book = books[0])
+fun BookInfo( modifier: Modifier = Modifier) {
+    BookDetailsScreen( bookid = "1")
 
 }
