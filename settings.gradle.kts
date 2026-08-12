@@ -32,3 +32,5 @@ include(":book:presentation")
 
 include(":bookinfo:domain")
 include(":bookinfo:presentation")
+include(":searchbook:domain")
+include(":searchbook:presentation")

@@ -55,5 +55,7 @@ dependencies {
     implementation(project(":book:domain"))
     implementation(project(":book:presentation"))
     implementation(project(":bookinfo:presentation"))
+    implementation(project(":searchbook:presentation"))
+
 
 }
