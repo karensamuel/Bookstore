@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/bookinfo/domain" />
             <option value="$PROJECT_DIR$/bookinfo/presentation" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/data" />
             <option value="$PROJECT_DIR$/core/domain" />
             <option value="$PROJECT_DIR$/core/presentation" />
             <option value="$PROJECT_DIR$/searchbook" />
