@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/book" />
+            <option value="$PROJECT_DIR$/book/data" />
             <option value="$PROJECT_DIR$/book/domain" />
             <option value="$PROJECT_DIR$/book/presentation" />
             <option value="$PROJECT_DIR$/bookinfo" />
