@@ -4,6 +4,6 @@ import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
 import com.example.domain.repo.modles.Book
 
-interface BookDataSource {
-    suspend fun getBooks():Result<List<Book>, DataError>
+interface BookRepository {
+    suspend fun getBooks(): Result<List<Book>, DataError>
 }
