@@ -14,12 +14,13 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 class BookRemoteDataSource(
-    private val client: HttpClient
+    private val client: HttpClient,
+    private val searchEndoint: String
 ) {
 
     suspend fun getBooks(q: String): Result<List<BookSearch>, DataError> {
         val result: Result<BooksSearchResponseDto, DataError.Network> = safeCall {
-            client.get("search.json") {
+            client.get(searchEndoint) {
                 parameter("q", q)
             }
 

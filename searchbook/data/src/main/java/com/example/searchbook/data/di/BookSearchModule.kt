@@ -9,14 +9,12 @@ import io.ktor.client.HttpClient
 import org.koin.dsl.module
 
 
-val bookSearchModule = module {
+fun bookSearchModule(searchEndoint: String) = module {
 
-    single<HttpClient> {
-        createHttpClient()
-    }
+
 
     single<BookRemoteDataSource> {
-        BookRemoteDataSource(get())
+        BookRemoteDataSource(get(), searchEndoint)
     }
 
     single<SearchRepo> {

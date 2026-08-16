@@ -10,14 +10,15 @@ import io.ktor.client.HttpClient
 import org.koin.dsl.module
 
 
-val bookInfoModule = module {
-
-    single<HttpClient> {
-        createHttpClient()
-    }
+fun bookInfoModule(
+    bookInfoEndpoint: String
+) = module {
 
     single<BookInfoRemoteDataSource> {
-        BookInfoRemoteDataSource(get())
+        BookInfoRemoteDataSource(
+            client = get(),
+            bookInfoEndpoint = bookInfoEndpoint
+        )
     }
 
     single<BookInfoRepo> {

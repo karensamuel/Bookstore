@@ -8,8 +8,8 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-
-fun createHttpClient(): HttpClient {
+import com.example.core.data.BuildConfig
+fun createHttpClient(baseUrl: String): HttpClient {
     return HttpClient(Android) {
 
         install(ContentNegotiation) {
@@ -23,7 +23,7 @@ fun createHttpClient(): HttpClient {
         }
 
         defaultRequest {
-            url("https://openlibrary.org/")
+            url(baseUrl)
             contentType(ContentType.Application.Json)
         }
     }

@@ -14,7 +14,8 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 class BookInfoRemoteDataSource(
-    private val client: HttpClient
+    private val client: HttpClient,
+    private val bookInfoEndpoint: String
 ) {
 
     suspend fun getBookDetails(
@@ -22,7 +23,7 @@ class BookInfoRemoteDataSource(
     ): Result<BookInfoModel, DataError> {
 
         val result: Result<BookInfoDto, DataError.Network> = safeCall {
-            client.get("works/$bookId.json")
+            client.get("$bookInfoEndpoint$bookId.json")
         }
 
         return result.map { response ->

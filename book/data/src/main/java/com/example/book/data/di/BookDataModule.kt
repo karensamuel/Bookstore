@@ -8,14 +8,12 @@ import io.ktor.client.HttpClient
 import org.koin.dsl.module
 
 
-val bookDataModule = module {
+fun bookDataModule( bookEndpoint: String) = module {
 
-    single<HttpClient> {
-        createHttpClient()
-    }
+
 
     single<BookRemoteDataSource> {
-        BookRemoteDataSource(get())
+        BookRemoteDataSource(get(),bookEndpoint)
     }
 
     single<BookRepository> {
