@@ -1,4 +1,4 @@
-package com.example.searchbook.domain.models
+package com.example.domain.repo.model
 
 data class Book(
     val id: String,

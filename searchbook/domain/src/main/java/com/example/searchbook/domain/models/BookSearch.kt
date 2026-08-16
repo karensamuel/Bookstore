@@ -1,6 +1,6 @@
-package com.example.domain.repo.modles
+package com.example.searchbook.domain.models
 
-data class Book(
+data class BookSearch(
     val id: String,
     val title: String,
     val authors: List<String>,

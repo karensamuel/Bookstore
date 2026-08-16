@@ -6,23 +6,22 @@ import com.example.core.data.network.safeCall
 import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
 import com.example.core.domain.model.result.map
-import com.example.domain.repo.modles.Book
+import com.example.domain.repo.model.Book
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import io.ktor.client.request.parameter
 
 class BookRemoteDataSource(
     private val client: HttpClient
-)  {
+) {
 
-   suspend fun getBooks():  Result<List<Book>, DataError> {
-        val result :  Result<BooksResponseDto, DataError.Network> = safeCall {
-            client.get("search.json") {
-                parameter("q","android")
+    suspend fun getBooks(): Result<List<Book>, DataError> {
+        val result: Result<BooksResponseDto, DataError.Network> = safeCall {
+            client.get("trending/now.json") {
+
             }
         }
         return result.map { response ->
-            response.docs.map { it.toDomain() }
+            response.works.map { it.toDomain() }
         }
 
     }

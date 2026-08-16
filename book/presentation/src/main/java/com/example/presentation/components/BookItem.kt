@@ -1,7 +1,16 @@
 package com.example.presentation.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -15,10 +24,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.domain.repo.modles.Book
+import coil.compose.AsyncImage
+import com.example.domain.repo.model.Book
 
 @Composable
-fun BookItem(book: Book) {
+fun BookItem(book: Book, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -31,7 +41,8 @@ fun BookItem(book: Book) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(12.dp)
+                .clickable(onClick = onClick),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -46,8 +57,13 @@ fun BookItem(book: Book) {
             ) {
                 if (book.coverUrl.isNullOrEmpty()) {
                     Text(
-                        text = "📖",
-                        style = MaterialTheme.typography.headlineMedium
+                        text = "📖", style = MaterialTheme.typography.headlineMedium
+                    )
+                } else {
+                    AsyncImage(
+                        model = book.coverUrl,
+                        contentDescription = book.title,
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
@@ -94,8 +110,6 @@ private fun BookItemPreview() {
         title = "The Great Gatsby",
         authors = listOf("F. Scott Fitzgerald"),
         coverUrl = null,
-
     )
-
-    BookItem(book)
+    BookItem(book, onClick = {})
 }

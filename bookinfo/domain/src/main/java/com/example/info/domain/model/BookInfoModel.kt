@@ -1,6 +1,6 @@
 package com.example.info.domain.model
 
-data class BookModel (
+data class BookInfoModel (
     val id: String,
     val title: String,
     val authors: List<String>,

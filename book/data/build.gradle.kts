@@ -29,13 +29,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
     implementation(project(":book:domain"))
-    implementation(libs.ktor.serialization.kotlinx.json)
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
-
+    implementation(libs.koin.android)
 
 }

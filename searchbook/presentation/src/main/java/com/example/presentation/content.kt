@@ -8,13 +8,17 @@ import androidx.compose.runtime.setValue
 import com.example.presentation.components.SearchBar
 
 @Composable
-fun SearchRoute() {
+fun SearchRoute(onSearch: (String) -> Unit) {
 
     var query by remember { mutableStateOf("") }
 
     SearchBar(
 
         query = query,
-        onQueryChange = { query = it }
+        onQueryChange = {
+            query = it
+            onSearch(it)
+
+        }
     )
 }

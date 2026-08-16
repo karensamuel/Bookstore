@@ -1,6 +1,6 @@
 package com.example.bookstore
 
-import com.example.domain.repo.modles.Book
+import com.example.domain.repo.model.Book
 
 val books = listOf(
     Book(

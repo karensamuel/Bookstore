@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/book/domain" />
             <option value="$PROJECT_DIR$/book/presentation" />
             <option value="$PROJECT_DIR$/bookinfo" />
+            <option value="$PROJECT_DIR$/bookinfo/data" />
             <option value="$PROJECT_DIR$/bookinfo/domain" />
             <option value="$PROJECT_DIR$/bookinfo/presentation" />
             <option value="$PROJECT_DIR$/core" />
@@ -22,6 +23,7 @@
             <option value="$PROJECT_DIR$/core/domain" />
             <option value="$PROJECT_DIR$/core/presentation" />
             <option value="$PROJECT_DIR$/searchbook" />
+            <option value="$PROJECT_DIR$/searchbook/data" />
             <option value="$PROJECT_DIR$/searchbook/domain" />
             <option value="$PROJECT_DIR$/searchbook/presentation" />
           </set>
