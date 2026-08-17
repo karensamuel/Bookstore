@@ -26,6 +26,9 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck
+
       - name: Build APK
         run: ./gradlew assembleDebug
 
