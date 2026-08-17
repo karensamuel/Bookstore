@@ -10,18 +10,22 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/book" />
+            <option value="$PROJECT_DIR$/book/data" />
+            <option value="$PROJECT_DIR$/book/domain" />
+            <option value="$PROJECT_DIR$/book/presentation" />
+            <option value="$PROJECT_DIR$/bookinfo" />
+            <option value="$PROJECT_DIR$/bookinfo/data" />
+            <option value="$PROJECT_DIR$/bookinfo/domain" />
+            <option value="$PROJECT_DIR$/bookinfo/presentation" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/data" />
             <option value="$PROJECT_DIR$/core/domain" />
             <option value="$PROJECT_DIR$/core/presentation" />
-            <option value="$PROJECT_DIR$/hom" />
-            <option value="$PROJECT_DIR$/hom/domain" />
-            <option value="$PROJECT_DIR$/hom/presentation" />
-            <option value="$PROJECT_DIR$/info" />
-            <option value="$PROJECT_DIR$/info/domain" />
-            <option value="$PROJECT_DIR$/info/presentation" />
-            <option value="$PROJECT_DIR$/searches" />
-            <option value="$PROJECT_DIR$/searches/domain" />
-            <option value="$PROJECT_DIR$/searches/presentation" />
+            <option value="$PROJECT_DIR$/searchbook" />
+            <option value="$PROJECT_DIR$/searchbook/data" />
+            <option value="$PROJECT_DIR$/searchbook/domain" />
+            <option value="$PROJECT_DIR$/searchbook/presentation" />
           </set>
         </option>
       </GradleProjectSettings>

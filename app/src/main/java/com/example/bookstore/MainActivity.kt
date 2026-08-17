@@ -1,41 +1,62 @@
 package com.example.bookstore
 
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-
-
+import com.example.book.presentation.BookListRoute
+import com.example.bookinfo.presentation.components.BookDetailsScreen
 import com.example.bookstore.ui.theme.BookStoreTheme
-import com.example.core.domain.model.Book
-import com.example.info.presentation.components.BookDetailsScreen
-import com.example.presentation.BookList
-import com.example.presentation.SearchBar
+import com.example.core.domain.model.result.onError
+import com.example.core.domain.model.result.onSuccess
+import com.example.domain.repo.BookRepository
+import com.example.domain.repo.model.BookModel
+import com.example.info.domain.BookInfoRepo
+import com.example.info.domain.model.BookInfoModel
+import com.example.searchbook.domain.SearchRepo
+import com.example.searchbook.presentation.SearchRoute
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+
 
 class MainActivity : ComponentActivity() {
+    private val bookRepository: BookRepository by inject()
+    private val searchRepo: SearchRepo by inject()
+    private val bookInfoRepo: BookInfoRepo by inject()
+    private var bookInfo by mutableStateOf<BookInfoModel?>(null)
+    private var bookModels by mutableStateOf<List<BookModel>>(emptyList())
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        lifecycleScope.launch {
+
+            val result = bookRepository.getBooks()
+
+            result.onSuccess {
+                bookModels = it
+            }
+
+            result.onError { error ->
+                println("ERROR: $error")
+            }
+        }
+
 
         setContent {
             BookStoreTheme {
@@ -43,55 +64,116 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
 
-                    NavGraph(navController)
+                NavGraph(
 
+
+                    navController = navController,
+                    bookModels = bookModels,
+                    bookInfo = bookInfo,
+                    onSearch = ::searchBooks,
+                    onBookClick = ::getBookInfo,
+
+                    )
+
+            }
+        }
+    }
+
+    private fun searchBooks(query: String) {
+        lifecycleScope.launch {
+            val result = searchRepo.searchBooks(query)
+
+            result.onSuccess { searchBooks ->
+                bookModels = searchBooks.map { searchBook ->
+                    BookModel(
+                        id = searchBook.id.removePrefix("/works/"),
+                        title = searchBook.title,
+                        authors = searchBook.authors,
+                        coverUrl = searchBook.coverUrl
+                    )
+                }
+            }
+
+            result.onError {
+                println("SEARCH ERROR: $it")
+            }
+        }
+    }
+
+    private fun getBookInfo(bookId: String) {
+        lifecycleScope.launch {
+
+            val result = bookInfoRepo.getBookDetails(bookId)
+
+            result.onSuccess {
+                bookInfo = it
+            }
+
+            result.onError {
+                println("BOOK INFO ERROR: $it")
             }
         }
     }
 }
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(
+    navController: NavHostController,
+    bookModels: List<BookModel>,
+    bookInfo: BookInfoModel?,
+    onSearch: (String) -> Unit,
+    onBookClick: (String) -> Unit,
+) {
 
     NavHost(
         navController = navController,
-        startDestination = "bookinfo"
+        startDestination = "home"
     ) {
 
         composable("home") {
-            HomeScreen()
+            HomeRoute(bookModels = bookModels, onSearch = onSearch, onBookClick = { bookId ->
+                val normalizedId = bookId.removePrefix("/works/")
+
+                onBookClick(normalizedId)
+                navController.navigate("bookinfo/$normalizedId")
+            })
         }
-        composable("bookinfo") {
-            BookInfo()
-        }
-    }
-}
-@Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+        composable("bookinfo/{bookId}") { backStackEntry ->
 
-    var query by remember { mutableStateOf("") }
 
-    Column {
-        SearchBar(
-            query = query,
-            onQueryChange = { query = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        )
-
-            BookList(
-                books = books,
-                modifier = Modifier
-                    .fillMaxSize()
-
+            BookInfo(
+                bookInfo = bookInfo
             )
-
-
+        }
     }
 }
+
+
 @Composable
-fun BookInfo(modifier: Modifier = Modifier) {
-    BookDetailsScreen( book = books[0])
+fun BookInfo(
+    bookInfo: BookInfoModel?
+) {
+    if (bookInfo != null) {
+        BookDetailsScreen(
+            book = bookInfo
+        )
+    } else {
+        CircularProgressIndicator()
+    }
+}
+
+@Composable
+fun HomeRoute(
+    modifier: Modifier = Modifier,
+    bookModels: List<BookModel>,
+    onSearch: (String) -> Unit,
+    onBookClick: (String) -> Unit
+) {
+
+    Column() {
+        SearchRoute(onSearch = onSearch)
+        BookListRoute(bookModels = bookModels, modifier = modifier, onBookClick = onBookClick)
+    }
+
 
 }

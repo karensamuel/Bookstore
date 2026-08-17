@@ -16,14 +16,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    buildTypes {
-        release {
-            optimization {
-                enable = false
-            }
-        }
+    buildFeatures {
+        buildConfig = true
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -51,9 +47,19 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.koin.android)
     implementation(project(":core:domain"))
-    implementation(project(":hom:domain"))
-    implementation(project(":hom:presentation"))
-    implementation(project(":searches:presentation"))
-    implementation(project(":info:presentation"))
+    implementation(project(":core:data"))
+    implementation(project(":book:domain"))
+    implementation(project(":book:presentation"))
+    implementation(project(":book:data"))
+    implementation(project(":bookinfo:presentation"))
+    implementation(project(":searchbook:presentation"))
+    implementation(project(":searchbook:domain"))
+    implementation(project(":searchbook:data"))
+    implementation(project(":bookinfo:domain"))
+    implementation(project(":bookinfo:data"))
 }
+
+
+
