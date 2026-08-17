@@ -19,6 +19,46 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        buildConfig = true
+    }
+
+    buildTypes {
+        release {
+            buildConfigField(
+                "String",
+                "BOOK_INFO_ENDPOINT",
+                "\"works/\""
+            )
+            buildConfigField(
+                "String",
+                "COVER_BASE_URL",
+                "\"https://covers.openlibrary.org/b/id/\""
+            )
+            buildConfigField(
+                "String",
+                "COVER_SIZE",
+                "\"L\""
+            )
+        }
+        debug {
+            buildConfigField(
+                "String",
+                "BOOK_INFO_ENDPOINT",
+                "\"works/\""
+            )
+            buildConfigField(
+                "String",
+                "COVER_BASE_URL",
+                "\"https://covers.openlibrary.org/b/id/\""
+            )
+            buildConfigField(
+                "String",
+                "COVER_SIZE",
+                "\"L\""
+            )
+        }
+    }
 
 }
 

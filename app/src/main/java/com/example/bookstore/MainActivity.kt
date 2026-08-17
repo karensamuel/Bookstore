@@ -19,7 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.book.presentation.BookListRoute
-import com.example.bookinfo.domain.repo.BookInfoRepo
+import com.example.info.domain.BookInfoRepo
 import com.example.bookinfo.presentation.components.BookDetailsScreen
 import com.example.bookstore.ui.theme.BookStoreTheme
 import com.example.core.domain.model.result.onError

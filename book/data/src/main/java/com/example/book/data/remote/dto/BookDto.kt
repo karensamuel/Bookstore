@@ -11,5 +11,6 @@ data class BookDto(
     val title: String,
     @SerialName("author_name")
     val authorName: List<String>? = null,
-    val cover_i: Int? = null,
+    @SerialName("cover_i")
+    val coverI: Int? = null,
 )

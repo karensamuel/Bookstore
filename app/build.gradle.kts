@@ -19,58 +19,7 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    buildTypes {
-        release {
-            optimization {
-                enable = false
-            }
-            buildConfigField(
-                "String",
-                "BASE_URL",
-                "\"https://openlibrary.org/\""
-            )
-            buildConfigField(
-                "String",
-                "SEARCH_ENDPOINT",
-                "\"search.json\""
-            )
-            buildConfigField(
-                "String",
-                "GET_BOOKS_ENDPOINT",
-                "\"trending/now.json\""
-            )
-            buildConfigField(
-                "String",
-                "BOOK_INFO_ENDPOINT",
-                "\"works/\""
-            )
 
-
-        }
-        debug {
-            buildConfigField(
-                "String",
-                "BASE_URL",
-                "\"https://openlibrary.org/\""
-            )
-            buildConfigField(
-                "String",
-                "SEARCH_ENDPOINT",
-                "\"search.json\""
-            )
-            buildConfigField(
-                "String",
-                "GET_BOOKS_ENDPOINT",
-                "\"trending/now.json\""
-            )
-            buildConfigField(
-                "String",
-                "BOOK_INFO_ENDPOINT",
-                "\"works/\""
-            )
-
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

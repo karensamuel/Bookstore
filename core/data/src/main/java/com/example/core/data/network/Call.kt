@@ -19,41 +19,41 @@ suspend inline fun <reified T> safeCall(
 
     return try {
 
-        println("========== SAFE CALL START ==========")
+        println("========== SAFE CALL START karen ==========")
 
         val response = block()
 
-        println("HTTP STATUS: ${response.status}")
-        println("HTTP URL: ${response.call.request.url}")
+        println("HTTP STATUS karen : ${response.status}")
+        println("HTTP URL karen : ${response.call.request.url}")
 
         if (response.status.isSuccess()) {
 
-            println("========== HTTP SUCCESS ==========")
+            println("========== HTTP SUCCESS karen ==========")
 
             Result.Success(response.body())
 
         } else {
 
-            println("========== HTTP ERROR ==========")
+            println("========== HTTP ERROR karen  ==========")
 
             mapHttpErrorToResult(response)
         }
 
     } catch (e: UnknownHostException) {
 
-        println("UNKNOWN HOST: ${e.message}")
+        println("UNKNOWN HOST karen : ${e.message}")
         Result.Error(DataError.Network.NO_INTERNET)
 
     } catch (e: IOException) {
 
-        println("IO EXCEPTION: ${e.message}")
+        println("IO EXCEPTION karen : ${e.message}")
         e.printStackTrace()
 
         Result.Error(DataError.Network.REQUEST_TIMEOUT)
 
     } catch (e: SerializationException) {
 
-        println("SERIALIZATION ERROR: ${e.message}")
+        println("SERIALIZATION ERROR karen : ${e.message}")
         Log.d("TAG", "safeCall: ${e.message}")
         e.printStackTrace()
 
@@ -65,13 +65,11 @@ suspend inline fun <reified T> safeCall(
 
     } catch (e: Exception) {
 
-        println("========== UNKNOWN EXCEPTION ==========")
-        println("TYPE: ${e::class.qualifiedName}")
-        println("MESSAGE: ${e.message}")
-
-        e.printStackTrace()
-
-        println("======================================")
+        Log.e(
+            "SAFE_CALL karen ",
+            "Request failed: ${e::class.qualifiedName}: ${e.message}",
+            e
+        )
 
         coroutineContext.ensureActive()
 

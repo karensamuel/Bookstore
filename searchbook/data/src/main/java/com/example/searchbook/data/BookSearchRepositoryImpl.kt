@@ -4,11 +4,12 @@ import com.example.core.domain.model.error.DataError
 
 
 import com.example.core.domain.model.result.Result
+import com.example.searchbook.domain.BookSearchDataSource
 import com.example.searchbook.domain.SearchRepo
 import com.example.searchbook.domain.models.BookSearch
 
 class BookSearchRepositoryImpl(
-    private val remoteDataSource: BookRemoteDataSource
+    private val remoteDataSource: BookSearchDataSource
 ) : SearchRepo {
 
 

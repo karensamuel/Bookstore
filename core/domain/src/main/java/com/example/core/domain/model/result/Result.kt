@@ -13,6 +13,12 @@ inline  fun <T, E : DomainError, R> Result<T, E>.map(mapper: (T) -> R): Result<R
         is Result.Error -> Result.Error(error)
     }
     }
+inline fun <T, E : DomainError, R> Result<T, E>.flatMap(transform: (T) -> Result<R, E>): Result<R, E> {
+    return when (this) {
+        is Result.Success -> transform(data)
+        is Result.Error -> Result.Error(error)
+    }
+}
 inline  fun <T,E: DomainError> Result <T,E>.onSuccess(action: (T) -> Unit): Result<T,E>{
     return when (this) {
         is Result.Success->{
@@ -20,8 +26,6 @@ inline  fun <T,E: DomainError> Result <T,E>.onSuccess(action: (T) -> Unit): Resu
             this
         }
         is Result.Error -> this
-
-
     }
 }
 inline  fun <T,E: DomainError> Result <T,E>.onError(action: (E) -> Unit): Result<T,E>{
@@ -36,3 +40,4 @@ inline  fun <T,E: DomainError> Result <T,E>.onError(action: (E) -> Unit): Result
         }
     }
 }
+

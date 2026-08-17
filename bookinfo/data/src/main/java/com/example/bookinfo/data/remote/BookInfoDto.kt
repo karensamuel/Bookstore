@@ -1,31 +1,30 @@
 package com.example.bookinfo.data.remote
 
 
-
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class BookInfoDto(
-    val key: String,
-    val title: String,
+    @SerialName("key") val key: String? = "",
+    @SerialName("title") val title: String? = "",
+    @SerialName("authors")
     val authors: List<WorkAuthorDto> = emptyList(),
+    @SerialName("covers")
     val covers: List<Int> = emptyList(),
-    val first_publish_date: String? = null,
-    val description: String? = null
+    @SerialName("first_publish_year") val firstPublishDate: String? = "",
+    @SerialName("description") val description: String? = ""
 )
 
 @Serializable
 data class WorkAuthorDto(
+    @SerialName("author")
     val author: AuthorKeyDto
 )
 
 @Serializable
 data class AuthorKeyDto(
+    @SerialName("key")
     val key: String
 )
 
-@Serializable
-data class AuthorDto(
-    val key: String,
-    val name: String
-)

@@ -3,22 +3,20 @@ package com.example.bookinfo.data.di
 
 import com.example.bookinfo.data.BookInfoRemoteDataSource
 import com.example.bookinfo.data.BookInfoRepoImpl
-import com.example.bookinfo.domain.repo.BookInfoRepo
-import com.example.core.data.network.service.createHttpClient
-
-import io.ktor.client.HttpClient
+import com.example.info.domain.BookInfoDataSource
+import com.example.info.domain.BookInfoRepo
 import org.koin.dsl.module
 
 
 fun bookInfoModule(
-    bookInfoEndpoint: String
+
 ) = module {
 
-    single<BookInfoRemoteDataSource> {
+    single<BookInfoDataSource> {
         BookInfoRemoteDataSource(
             client = get(),
-            bookInfoEndpoint = bookInfoEndpoint
-        )
+
+            )
     }
 
     single<BookInfoRepo> {

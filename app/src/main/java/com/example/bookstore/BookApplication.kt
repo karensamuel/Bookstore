@@ -19,14 +19,11 @@ class BookApplication : Application() {
 
             modules(
                 coreDataModule(
-                    baseUrl = BuildConfig.BASE_URL
                 ),
                 bookDataModule(
-                    bookEndpoint = BuildConfig.GET_BOOKS_ENDPOINT
-                ),
-                bookSearchModule(searchEndoint = BuildConfig.SEARCH_ENDPOINT),
+                ), bookSearchModule(),
                 bookInfoModule(
-                    bookInfoEndpoint = BuildConfig.BOOK_INFO_ENDPOINT
+
                 )
             )
         }
