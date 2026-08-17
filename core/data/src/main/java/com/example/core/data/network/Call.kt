@@ -13,6 +13,7 @@ import java.io.IOException
 import java.net.UnknownHostException
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.coroutineContext
+
 suspend inline fun <reified T> safeCall(
     crossinline block: suspend () -> HttpResponse
 ): Result<T, DataError.Network> {

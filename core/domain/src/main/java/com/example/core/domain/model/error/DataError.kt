@@ -1,12 +1,10 @@
 package com.example.core.domain.model.error
 
-
-
 sealed interface DataError : Error {
     /**
      * Enum class representing various network errors.
      */
-    enum class Network :DataError {
+    enum class Network : DataError {
         /** Request timed out. */
         REQUEST_TIMEOUT,
 
@@ -26,7 +24,8 @@ sealed interface DataError : Error {
         UNKNOWN,
     }
 
-    enum class Local :DataError {
-        DISK_FULL, UNKNOWN
+    enum class Local : DataError {
+        DISK_FULL,
+        UNKNOWN,
     }
 }

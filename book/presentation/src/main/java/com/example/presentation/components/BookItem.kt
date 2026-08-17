@@ -25,10 +25,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.domain.repo.model.Book
+import com.example.domain.repo.model.BookModel
 
 @Composable
-fun BookItem(book: Book, onClick: () -> Unit) {
+fun BookItem(bookModel: BookModel, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,14 +55,14 @@ fun BookItem(book: Book, onClick: () -> Unit) {
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center
             ) {
-                if (book.coverUrl.isNullOrEmpty()) {
+                if (bookModel.coverUrl.isNullOrEmpty()) {
                     Text(
                         text = "📖", style = MaterialTheme.typography.headlineMedium
                     )
                 } else {
                     AsyncImage(
-                        model = book.coverUrl,
-                        contentDescription = book.title,
+                        model = bookModel.coverUrl,
+                        contentDescription = bookModel.title,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -75,7 +75,7 @@ fun BookItem(book: Book, onClick: () -> Unit) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = book.title,
+                    text = bookModel.title,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     maxLines = 2,
@@ -85,7 +85,7 @@ fun BookItem(book: Book, onClick: () -> Unit) {
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = book.authors.firstOrNull() ?: "Unknown author",
+                    text = bookModel.authors.firstOrNull() ?: "Unknown author",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -105,11 +105,11 @@ fun BookItem(book: Book, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 private fun BookItemPreview() {
-    val book = Book(
+    val bookModel = BookModel(
         id = "1",
         title = "The Great Gatsby",
         authors = listOf("F. Scott Fitzgerald"),
         coverUrl = null,
     )
-    BookItem(book, onClick = {})
+    BookItem(bookModel, onClick = {})
 }

@@ -17,7 +17,7 @@ import io.ktor.client.request.parameter
 class BookSearchRemoteDataSource(
     private val client: HttpClient,
 
-) : BookSearchDataSource {
+    ) : BookSearchDataSource {
 
     override suspend fun getBooks(q: String): Result<List<BookSearch>, DataError> {
         Log.d("book endpoint karen", "${BuildConfig.SEARCH_ENDPOINT}")

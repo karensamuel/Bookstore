@@ -1,6 +1,6 @@
 package com.example.info.domain.model
 
-data class AuthorModel (
+data class AuthorModel(
     val id: String,
     val name: String,
 )

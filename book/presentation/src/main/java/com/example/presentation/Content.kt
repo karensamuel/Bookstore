@@ -5,17 +5,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.domain.repo.model.Book
+import com.example.domain.repo.model.BookModel
 import com.example.presentation.components.BookItem
 
 
 @Composable
 fun BookList(
-    books: List<Book>, modifier: Modifier = Modifier, onBookClick: (String) -> Unit
+    bookModels: List<BookModel>, modifier: Modifier = Modifier, onBookClick: (String) -> Unit
 ) {
     Column(modifier = modifier) {
         LazyColumn {
-            items(books) { book ->
+            items(bookModels) { book ->
                 BookItem(
                     book, onClick = {
                         onBookClick(book.id)
@@ -26,6 +26,6 @@ fun BookList(
 }
 
 @Composable
-fun BookListRoute(books: List<Book>, modifier: Modifier = Modifier, onBookClick: (String) -> Unit) {
-    BookList(books = books, modifier = modifier, onBookClick = onBookClick)
+fun BookListRoute(bookModels: List<BookModel>, modifier: Modifier = Modifier, onBookClick: (String) -> Unit) {
+    BookList(bookModels = bookModels, modifier = modifier, onBookClick = onBookClick)
 }

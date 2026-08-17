@@ -2,10 +2,10 @@ package com.example.book.data.remote.dto
 
 
 import com.example.book.data.BuildConfig
-import com.example.domain.repo.model.Book
+import com.example.domain.repo.model.BookModel
 
-fun BookDto.toDomain(): Book {
-    return Book(
+fun BookDto.toDomain(): BookModel {
+    return BookModel(
         id = key,
         title = title,
         authors = authorName ?: emptyList(), coverUrl = coverI?.let {

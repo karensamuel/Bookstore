@@ -19,13 +19,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.book.presentation.BookListRoute
-import com.example.info.domain.BookInfoRepo
 import com.example.bookinfo.presentation.components.BookDetailsScreen
 import com.example.bookstore.ui.theme.BookStoreTheme
 import com.example.core.domain.model.result.onError
 import com.example.core.domain.model.result.onSuccess
 import com.example.domain.repo.BookRepository
-import com.example.domain.repo.model.Book
+import com.example.domain.repo.model.BookModel
+import com.example.info.domain.BookInfoRepo
 import com.example.info.domain.model.BookInfoModel
 import com.example.searchbook.domain.SearchRepo
 import com.example.searchbook.presentation.SearchRoute
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
     private val searchRepo: SearchRepo by inject()
     private val bookInfoRepo: BookInfoRepo by inject()
     private var bookInfo by mutableStateOf<BookInfoModel?>(null)
-    private var books by mutableStateOf<List<Book>>(emptyList())
+    private var bookModels by mutableStateOf<List<BookModel>>(emptyList())
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             val result = bookRepository.getBooks()
 
             result.onSuccess {
-                books = it
+                bookModels = it
             }
 
             result.onError { error ->
@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
 
 
                     navController = navController,
-                    books = books,
+                    bookModels = bookModels,
                     bookInfo = bookInfo,
                     onSearch = ::searchBooks,
                     onBookClick = ::getBookInfo,
@@ -84,8 +84,8 @@ class MainActivity : ComponentActivity() {
             val result = searchRepo.searchBooks(query)
 
             result.onSuccess { searchBooks ->
-                books = searchBooks.map { searchBook ->
-                    Book(
+                bookModels = searchBooks.map { searchBook ->
+                    BookModel(
                         id = searchBook.id.removePrefix("/works/"),
                         title = searchBook.title,
                         authors = searchBook.authors,
@@ -119,7 +119,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    books: List<Book>,
+    bookModels: List<BookModel>,
     bookInfo: BookInfoModel?,
     onSearch: (String) -> Unit,
     onBookClick: (String) -> Unit,
@@ -131,7 +131,7 @@ fun NavGraph(
     ) {
 
         composable("home") {
-            HomeRoute(books = books, onSearch = onSearch, onBookClick = { bookId ->
+            HomeRoute(bookModels = bookModels, onSearch = onSearch, onBookClick = { bookId ->
                 val normalizedId = bookId.removePrefix("/works/")
 
                 onBookClick(normalizedId)
@@ -145,8 +145,8 @@ fun NavGraph(
                 bookInfo = bookInfo
             )
         }
-        }
     }
+}
 
 
 @Composable
@@ -165,14 +165,14 @@ fun BookInfo(
 @Composable
 fun HomeRoute(
     modifier: Modifier = Modifier,
-    books: List<Book>,
+    bookModels: List<BookModel>,
     onSearch: (String) -> Unit,
     onBookClick: (String) -> Unit
 ) {
 
     Column() {
         SearchRoute(onSearch = onSearch)
-        BookListRoute(books = books, modifier = modifier, onBookClick = onBookClick)
+        BookListRoute(bookModels = bookModels, modifier = modifier, onBookClick = onBookClick)
     }
 
 

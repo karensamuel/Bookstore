@@ -6,6 +6,5 @@ data class BookInfoModel(
     val authors: List<String>,
     val coverUrl: String?,
     val firstPublishYear: Int?,
-    val editionCount: Int
+    val editionCount: Int,
 )
-

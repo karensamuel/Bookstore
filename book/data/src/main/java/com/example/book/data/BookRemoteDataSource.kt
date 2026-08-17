@@ -8,16 +8,16 @@ import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
 import com.example.core.domain.model.result.map
 import com.example.domain.repo.BookDataSource
-import com.example.domain.repo.model.Book
+import com.example.domain.repo.model.BookModel
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 
 class BookRemoteDataSource(
     private val client: HttpClient,
 
-) : BookDataSource {
+    ) : BookDataSource {
 
-    override suspend fun getBooks(): Result<List<Book>, DataError> {
+    override suspend fun getBooks(): Result<List<BookModel>, DataError> {
         Log.d("book endpoint karen", "${BuildConfig.GET_BOOKS_ENDPOINT}")
         val result: Result<BooksResponseDto, DataError.Network> = safeCall {
             client.get(BuildConfig.GET_BOOKS_ENDPOINT) {

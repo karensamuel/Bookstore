@@ -5,5 +5,4 @@ data class BookSearch(
     val title: String,
     val authors: List<String>,
     val coverUrl: String?,
-
 )

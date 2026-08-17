@@ -6,10 +6,7 @@ import com.example.info.domain.model.AuthorModel
 import com.example.info.domain.model.BookInfoModel
 
 interface BookInfoDataSource {
-    suspend fun getBookDetails(
-        bookId: String
-    ): Result<BookInfoModel, DataError>
-
+    suspend fun getBookDetails(bookId: String): Result<BookInfoModel, DataError>
 
     suspend fun getAuthor(id: String): Result<AuthorModel, DataError>
 }
