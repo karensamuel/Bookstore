@@ -8,7 +8,7 @@ import com.example.searchbook.domain.SearchRepo
 import org.koin.dsl.module
 
 
-fun bookSearchModule() = module {
+val bookSearchModule= module {
 
 
     single<BookSearchDataSource> {

@@ -34,7 +34,6 @@ import org.koin.android.ext.android.inject
 
 
 class MainActivity : ComponentActivity() {
-    private val bookRepository: BookRepository by inject()
     private val searchRepo: SearchRepo by inject()
     private val bookInfoRepo: BookInfoRepo by inject()
     private var bookInfo by mutableStateOf<BookInfoModel?>(null)
@@ -44,18 +43,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        lifecycleScope.launch {
-
-            val result = bookRepository.getBooks()
-
-            result.onSuccess {
-                bookModels = it
-            }
-
-            result.onError { error ->
-                println("ERROR: $error")
-            }
-        }
 
 
         setContent {
@@ -172,7 +159,7 @@ fun HomeRoute(
 
     Column() {
         SearchRoute(onSearch = onSearch)
-        BookListRoute(bookModels = bookModels, modifier = modifier, onBookClick = onBookClick)
+        BookListRoute( modifier = modifier, onBookClick = onBookClick)
     }
 
 
