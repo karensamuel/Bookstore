@@ -7,7 +7,7 @@ import com.example.domain.repo.BookRepository
 import org.koin.dsl.module
 
 
-fun bookDataModule() = module {
+val bookDataModule = module {
 
 
     single<BookDataSource> {
