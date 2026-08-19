@@ -10,6 +10,10 @@ import com.example.book.presentation.model.BookUiState
 import com.example.core.domain.model.result.onError
 import com.example.core.domain.model.result.onSuccess
 import com.example.domain.repo.BookRepository
+import com.example.presentation.model.UiBookModel
+import com.example.presentation.model.toUiBook
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -45,8 +49,10 @@ class BookViewModel(
                 _uiState.update {
 
                     Log.d("book view model karen", "view model working")
+                   val  uiBooks = books.map { book->toUiBook(book) }
+
                     it.copy(
-                        books = books,
+                        books = uiBooks.toImmutableList(),
                         isLoading = false,
                         error = null
                     )

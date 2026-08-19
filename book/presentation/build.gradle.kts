@@ -53,4 +53,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.kotlinx.collections.immutable)
 }

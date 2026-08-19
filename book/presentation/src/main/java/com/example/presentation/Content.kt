@@ -11,11 +11,15 @@ import com.example.book.presentation.model.BookIntent
 import com.example.book.presentation.viewmodel.BookViewModel
 import com.example.domain.repo.model.BookModel
 import com.example.presentation.components.BookItem
+import com.example.presentation.model.UiBookModel
+import kotlinx.collections.immutable.ImmutableList
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BookList(
-    bookModels: List<BookModel>, modifier: Modifier = Modifier, onBookClick: (String) -> Unit
+    modifier: Modifier = Modifier,
+    bookModels: ImmutableList<UiBookModel>,
+    onBookClick: (String) -> Unit
 ) {
     Column(modifier = modifier) {
         LazyColumn {

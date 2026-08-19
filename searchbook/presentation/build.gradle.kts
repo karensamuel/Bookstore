@@ -41,6 +41,12 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation(project(":searchbook:domain"))
 
+    implementation(project(":core:domain"))
+    implementation(libs.koin.android)
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.koin.androidx.compose)
+
 
     // Compose tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
