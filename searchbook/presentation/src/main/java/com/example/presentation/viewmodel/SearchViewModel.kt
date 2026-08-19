@@ -13,6 +13,11 @@ import kotlinx.coroutines.launch
 
 import com.example.core.domain.model.result.onError
 import com.example.core.domain.model.result.onSuccess
+import com.example.presentation.model.UiBookSearch
+import com.example.presentation.model.toUiBook
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
+
 class SearchViewModel(
     private val searchRepo: SearchRepo
 ) : ViewModel() {
@@ -30,10 +35,11 @@ class SearchViewModel(
 
     private fun searchBooks(query: String) {
         if (query.isBlank()) {
+
             _uiState.update {
                 it.copy(
                     query = query,
-                    books = emptyList(),
+                    books =  persistentListOf(),
                     isLoading = false,
                     error = null
                 )
@@ -44,11 +50,13 @@ class SearchViewModel(
             _uiState.value = _uiState.value.copy(query = query, isLoading = true,error = null)
             val result =searchRepo.searchBooks(query)
             result.onSuccess { books ->
+
+                val uiBooks = books.map { book -> toUiBook(book) }
                 _uiState.update {
 
                     Log.d("book search  view model karen", "search view model working")
                     it.copy(
-                        books = books,
+                        books = uiBooks.toImmutableList(),
                         isLoading = false,
                         error = null
                     )

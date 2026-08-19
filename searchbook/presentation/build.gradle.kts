@@ -46,6 +46,7 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.kotlinx.collections.immutable)
 
 
     // Compose tooling
