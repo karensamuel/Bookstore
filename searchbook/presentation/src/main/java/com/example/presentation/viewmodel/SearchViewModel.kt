@@ -15,11 +15,12 @@ import com.example.core.domain.model.result.onError
 import com.example.core.domain.model.result.onSuccess
 import com.example.presentation.model.UiBookSearch
 import com.example.presentation.model.toUiBook
+import com.example.searchbook.domain.usecases.SearchBookUseCase
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 
 class SearchViewModel(
-    private val searchRepo: SearchRepo
+    private val searchUseCase: SearchBookUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchUiState())
@@ -48,7 +49,7 @@ class SearchViewModel(
         }
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(query = query, isLoading = true,error = null)
-            val result =searchRepo.searchBooks(query)
+            val result =searchUseCase.invoke(query)
             result.onSuccess { books ->
 
                 val uiBooks = books.map { book -> toUiBook(book) }
