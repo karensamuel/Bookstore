@@ -8,9 +8,7 @@ import com.example.info.domain.BookInfoRepo
 import org.koin.dsl.module
 
 
-fun bookInfoModule(
-
-) = module {
+val bookInfoModule= module {
 
     single<BookInfoDataSource> {
         BookInfoRemoteDataSource(

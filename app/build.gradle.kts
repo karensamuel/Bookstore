@@ -48,6 +48,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.koin.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.kotlinx.collections.immutable)
+
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":book:domain"))
