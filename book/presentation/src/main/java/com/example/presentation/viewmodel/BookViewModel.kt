@@ -10,6 +10,7 @@ import com.example.book.presentation.model.BookUiState
 import com.example.core.domain.model.result.onError
 import com.example.core.domain.model.result.onSuccess
 import com.example.domain.repo.BookRepository
+import com.example.domain.repo.usecases.BookUseCase
 import com.example.presentation.model.UiBookModel
 import com.example.presentation.model.toUiBook
 import kotlinx.collections.immutable.ImmutableList
@@ -21,7 +22,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class BookViewModel(
-    private val bookRepository: BookRepository
+    private val bookUseCase: BookUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(BookUiState())
@@ -43,7 +44,7 @@ class BookViewModel(
                 )
             }
 
-            val result = bookRepository.getBooks()
+            val result = bookUseCase.invoke()
 
             result.onSuccess { books ->
                 _uiState.update {
