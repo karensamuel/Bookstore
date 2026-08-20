@@ -29,6 +29,8 @@ import com.example.core.domain.model.result.onSuccess
 import com.example.info.domain.BookInfoRepo
 import com.example.info.domain.model.BookInfoModel
 import com.example.info.presentation.BookDetailsScreen
+import com.example.info.presentation.model.InfoIntent
+import com.example.info.presentation.viewmodel.InfoViewModel
 import com.example.presentation.model.UiBookModel
 import com.example.presentation.viewmodel.SearchViewModel
 import com.example.searchbook.presentation.SearchRoute
@@ -40,8 +42,7 @@ import org.koin.androidx.compose.koinViewModel
 
 
 class MainActivity : ComponentActivity() {
-    private val bookInfoRepo: BookInfoRepo by inject()
-    private var bookInfo by mutableStateOf<BookInfoModel?>(null)
+
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,8 +60,8 @@ class MainActivity : ComponentActivity() {
 
 
                     navController = navController,
-                    bookInfo = bookInfo,
-                    onBookClick = ::getBookInfo,
+
+
 
                     )
 
@@ -69,27 +70,13 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    private fun getBookInfo(bookId: String) {
-        lifecycleScope.launch {
-
-            val result = bookInfoRepo.getBookDetails(bookId)
-
-            result.onSuccess {
-                bookInfo = it
-            }
-
-            result.onError {
-                println("BOOK INFO ERROR: $it")
-            }
-        }
-    }
 }
 
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    bookInfo: BookInfoModel?,
-    onBookClick: (String) -> Unit,
+
+
 ) {
 
     NavHost(
@@ -101,15 +88,18 @@ fun NavGraph(
             HomeRoute(onBookClick = { bookId ->
                 val normalizedId = bookId.removePrefix("/works/")
 
-                onBookClick(normalizedId)
                 navController.navigate("bookinfo/$normalizedId")
             })
         }
         composable("bookinfo/{bookId}") { backStackEntry ->
 
 
+            val bookId = requireNotNull(
+                backStackEntry.arguments?.getString("bookId")
+            )
+
             BookInfo(
-                bookInfo = bookInfo
+                bookId = bookId
             )
         }
     }
@@ -118,15 +108,18 @@ fun NavGraph(
 
 @Composable
 fun BookInfo(
-    bookInfo: BookInfoModel?
+    bookId: String,
 ) {
-    if (bookInfo != null) {
-        BookDetailsScreen(
-            book = bookInfo
-        )
-    } else {
-        CircularProgressIndicator()
+    val infoViewModel: InfoViewModel = koinViewModel()
+    LaunchedEffect(bookId) {
+        bookId.let {
+            infoViewModel.onIntent(InfoIntent.onLoadPage(it))
+        }
     }
+        BookDetailsScreen(
+            bookViewModel = infoViewModel
+        )
+
 }
 
 @Composable

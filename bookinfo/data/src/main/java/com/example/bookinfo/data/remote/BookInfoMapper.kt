@@ -4,7 +4,7 @@ package com.example.bookinfo.data.remote
 import com.example.bookinfo.data.BuildConfig
 import com.example.info.domain.model.BookInfoModel
 
-fun BookInfoDto.toDomain(authorNames: List<String>): BookInfoModel {
+fun BookInfoDto.toDomain(): BookInfoModel {
 
 
     val firstPublishYear = firstPublishDate
@@ -18,7 +18,7 @@ fun BookInfoDto.toDomain(authorNames: List<String>): BookInfoModel {
     return BookInfoModel(
         id = key?.removePrefix("/works/") ?: "",
         title = title,
-        authors = authorNames,
+        authors = authors.map { it.author.key },
         coverUrl = coverUrl,
         firstPublishYear = firstPublishYear,
         editionCount = 0

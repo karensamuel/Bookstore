@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AuthorDto(
     @SerialName("key")
-    val key: String, @SerialName("name")
+    val key: String,
+    @SerialName("name")
     val name: String
 )
