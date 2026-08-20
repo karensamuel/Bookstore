@@ -1,6 +1,7 @@
 package com.example.bookinfo.data
 
 import com.example.bookinfo.data.remote.AuthorDto
+import com.example.bookinfo.data.remote.BookInfoDto
 import com.example.bookinfo.data.remote.toDomain
 import com.example.core.data.network.safeCall
 import com.example.core.domain.model.error.DataError
@@ -19,15 +20,18 @@ class BookInfoRemoteDataSource(
     override suspend fun getBookDetails(
         bookId: String
     ): Result<BookInfoModel, DataError> {
-        return safeCall {
+        val result: Result<BookInfoDto, DataError.Network> = safeCall {
             client.get("${BuildConfig.BOOK_INFO_ENDPOINT}$bookId.json")
+        }
+        return result.map { bookInfoDto ->
+            bookInfoDto.toDomain()
         }
     }
 
 
     override suspend fun getAuthor(
         id: String
-    ): Result<AuthorModel, DataError.Network> {
+    ): Result<AuthorModel, DataError> {
         val result: Result<AuthorDto, DataError.Network> = safeCall {
             client.get("$id.json")
         }
