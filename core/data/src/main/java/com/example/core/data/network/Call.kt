@@ -5,12 +5,9 @@ import com.example.core.domain.model.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.launch
 import kotlinx.serialization.SerializationException
-import okhttp3.Dispatcher
 import java.io.IOException
 import java.net.UnknownHostException
 import kotlin.coroutines.cancellation.CancellationException
@@ -34,7 +31,7 @@ suspend inline fun <reified T> safeCall(
         Result.Error(DataError.Network.SERIALIZATION)
     } catch (e: CancellationException) {
         throw e
-    } catch (_: Exception) {
+    } catch (e: Exception) {
         currentCoroutineContext().ensureActive()
         Result.Error(DataError.Network.UNKNOWN)
     }

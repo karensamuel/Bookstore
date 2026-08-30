@@ -15,6 +15,10 @@ fun bookInfoMapper(bookInfo: BookInfoModel): UiBookInfoModel {
         editionCount = bookInfo.editionCount
     )
 }
-fun authorMapper(authors: ImmutableList<AuthorName>):  ImmutableList<String> {
-    return authors.map { it.name }.toImmutableList()
+
+fun authorMapper(authors: ImmutableList<AuthorName>): ImmutableList<String> {
+    return authors.map {
+
+        it.name
+    }.toImmutableList()
 }
