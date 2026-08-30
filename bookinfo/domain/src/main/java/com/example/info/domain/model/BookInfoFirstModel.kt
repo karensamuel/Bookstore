@@ -12,4 +12,6 @@ data class BookInfoFirstModel(
 )
 
 @JvmInline
-value class AuthorId(val id: String)
+value class AuthorId(
+    val id: String,
+)
