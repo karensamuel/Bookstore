@@ -2,7 +2,7 @@ package com.example.info.domain.model
 
 import kotlinx.collections.immutable.ImmutableList
 
-fun  toBookInfo(firstModel:BookInfoFirstModel,authors: ImmutableList<AuthorName>):BookInfoModel{
+fun toBookInfo(firstModel: BookInfoFirstModel, authors: ImmutableList<AuthorName>): BookInfoModel {
     return BookInfoModel(
         id = firstModel.id,
         title = firstModel.title,

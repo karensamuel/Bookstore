@@ -9,7 +9,7 @@ import com.example.info.domain.usecases.InfoBookUseCase
 import org.koin.dsl.module
 
 
-val bookInfoModule= module {
+val bookInfoModule = module {
     factory {
         InfoBookUseCase(get())
     }

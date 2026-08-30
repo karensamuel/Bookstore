@@ -4,4 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BooksResponseDto(
-    val works: List<BookDto>)
+    val works: List<BookDto>
+)

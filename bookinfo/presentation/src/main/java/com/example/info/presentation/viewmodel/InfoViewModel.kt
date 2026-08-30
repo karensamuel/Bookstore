@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class InfoViewModel(
     private val infoBookUseCase: InfoBookUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _uiState = MutableStateFlow(InfoUiState())
     val uiState: StateFlow<InfoUiState> = _uiState.asStateFlow()
     fun onIntent(intent: InfoIntent) {
@@ -32,13 +32,13 @@ class InfoViewModel(
             val result = infoBookUseCase.invoke(bookId)
 
             result.onSuccess { book ->
-                val uiBook =  bookInfoMapper(book)
+                val uiBook = bookInfoMapper(book)
                 _uiState.value = _uiState.value.copy(book = uiBook, isLoading = false, error = null)
             }
             result.onError { error ->
                 _uiState.value = _uiState.value.copy(isLoading = false, error = error.toString())
             }
         }
-        }
     }
+}
 

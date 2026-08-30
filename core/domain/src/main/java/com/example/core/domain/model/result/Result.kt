@@ -41,6 +41,7 @@ inline fun <T, E : DomainError> Result<T, E>.onError(action: (E) -> Unit): Resul
         is Result.Success -> {
             this
         }
+
         is Result.Error -> {
             action(error)
             this

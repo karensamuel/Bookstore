@@ -22,13 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.example.info.domain.model.BookInfoModel
 import com.example.info.presentation.viewmodel.InfoViewModel
 
 
 @Composable
 fun BookDetailsScreen(
-   bookViewModel: InfoViewModel
+    bookViewModel: InfoViewModel
 ) {
     val book by bookViewModel.uiState.collectAsStateWithLifecycle()
 

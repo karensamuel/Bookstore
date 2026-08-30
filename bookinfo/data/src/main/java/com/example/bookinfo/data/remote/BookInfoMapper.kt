@@ -3,14 +3,9 @@ package com.example.bookinfo.data.remote
 
 import com.example.bookinfo.data.BuildConfig
 import com.example.info.domain.model.AuthorId
-import com.example.info.domain.model.AuthorName
 import com.example.info.domain.model.BookInfoFirstModel
-import com.example.info.domain.model.BookInfoModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 
 fun BookInfoDto.toDomain(): BookInfoFirstModel {
 
@@ -33,8 +28,9 @@ fun BookInfoDto.toDomain(): BookInfoFirstModel {
         editionCount = 0
     )
 }
+
 fun changeToAuthorId(authors: List<WorkAuthorDto>): ImmutableList<AuthorId> {
-    val authorIds = authors.map { it.author.key.removePrefix("/authors/")  }
-    return authorIds.map {  AuthorId(it) }.toImmutableList()
+    val authorIds = authors.map { it.author.key.removePrefix("/authors/") }
+    return authorIds.map { AuthorId(it) }.toImmutableList()
 
 }

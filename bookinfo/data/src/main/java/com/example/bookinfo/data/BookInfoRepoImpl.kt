@@ -40,7 +40,7 @@ class BookInfoRepoImpl(
                 }
 
                 Result.Success(
-                    toBookInfo(book,authors )
+                    toBookInfo(book, authors)
                 )
             }
     }

@@ -14,7 +14,8 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 class BookSearchRemoteDataSource(
-    private val client: HttpClient) : BookSearchDataSource {
+    private val client: HttpClient
+) : BookSearchDataSource {
 
     override suspend fun getBooks(q: String): Result<List<BookSearch>, DataError> {
         val result: Result<BooksSearchResponseDto, DataError.Network> = safeCall {

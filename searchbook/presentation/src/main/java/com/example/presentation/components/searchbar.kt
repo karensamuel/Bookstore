@@ -33,7 +33,7 @@ fun SearchBar(
                 contentDescription = "Search",
 
 
-            )
+                )
         },
         singleLine = true,
         shape = RoundedCornerShape(16.dp)
