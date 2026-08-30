@@ -3,6 +3,7 @@ package com.example.bookinfo.data.remote
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
 
 @Serializable
 data class BookInfoDto(
@@ -13,7 +14,7 @@ data class BookInfoDto(
     @SerialName("covers")
     val covers: List<Int> = emptyList(),
     @SerialName("first_publish_year") val firstPublishDate: String? = "",
-    @SerialName("description") val description: String? = ""
+
 )
 
 @Serializable

@@ -1,14 +1,15 @@
 package com.example.bookinfo.data
 
+import android.util.Log
 import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
 import com.example.core.domain.model.result.flatMap
 import com.example.info.domain.BookInfoDataSource
 import com.example.info.domain.BookInfoRepo
+import com.example.info.domain.model.AuthorId
 import com.example.info.domain.model.AuthorName
 import com.example.info.domain.model.BookInfoModel
 import com.example.info.domain.model.toBookInfo
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 
@@ -21,24 +22,29 @@ class BookInfoRepoImpl(
         return remoteDataSource.getBookDetails(bookId)
             .flatMap { book ->
 
-                val authors = persistentListOf<AuthorName>()
+                var authors = persistentListOf<AuthorName>()
 
                 for (authorId in book.authors) {
+                    Log.d("BookInfoRepoImplkaren", "getBookDetails authorId: $authorId")
 
-                    when (val result = remoteDataSource.getAuthor(AuthorName(authorId.name))) {
+                    when (val result = remoteDataSource.getAuthor(AuthorId(authorId.id))) {
 
                         is Result.Success -> {
-                            authors.adding(AuthorName(result.data.name))
+                            Log.d("BookInfoRepoImplkaren", "getBookDetails auther name: ${result.data.name}")
+                            authors = authors.add(
+                                AuthorName(result.data.name)
+                            )
                         }
 
                         is Result.Error -> {
+                            Log.d("BookInfoRepoImplkaren", "getBookDetails error: ${result.error}")
                             return@flatMap Result.Error(result.error)
                         }
                     }
                 }
 
                 Result.Success(
-                    toBookInfo(book,authors as ImmutableList<AuthorName>)
+                    toBookInfo(book,authors )
                 )
             }
     }

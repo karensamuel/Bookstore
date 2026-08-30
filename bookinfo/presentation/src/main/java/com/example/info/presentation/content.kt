@@ -68,7 +68,7 @@ fun BookDetailsScreen(
         }
 
         Spacer(modifier = Modifier.height(8.dp))
- Log.d("book info", "${book.book?.authors?.joinToString(", ")}")
+ Log.d("book info ui karen", "${book.book?.authors?.joinToString(", ")}")
         // Authors
         Text(
             text = "by ${book.book?.authors?.joinToString(", ")}",

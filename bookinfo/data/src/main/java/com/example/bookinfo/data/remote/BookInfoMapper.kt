@@ -7,6 +7,10 @@ import com.example.info.domain.model.AuthorName
 import com.example.info.domain.model.BookInfoFirstModel
 import com.example.info.domain.model.BookInfoModel
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 fun BookInfoDto.toDomain(): BookInfoFirstModel {
 
@@ -19,6 +23,7 @@ fun BookInfoDto.toDomain(): BookInfoFirstModel {
         "${BuildConfig.COVER_BASE_URL}${coverId}-${BuildConfig.COVER_SIZE}.jpg"
     }
 
+
     return BookInfoFirstModel(
         id = key?.removePrefix("/works/") ?: "",
         title = title,
@@ -29,7 +34,7 @@ fun BookInfoDto.toDomain(): BookInfoFirstModel {
     )
 }
 fun changeToAuthorId(authors: List<WorkAuthorDto>): ImmutableList<AuthorId> {
-    val authorIds = authors.map { it.author.key }
-    return authorIds.map {  AuthorId(it) } as ImmutableList<AuthorId>
+    val authorIds = authors.map { it.author.key.removePrefix("/authors/")  }
+    return authorIds.map {  AuthorId(it) }.toImmutableList()
 
 }

@@ -19,7 +19,6 @@ class BookSearchRemoteDataSource(
 
     override suspend fun getBooks(q: String): Result<List<BookSearch>, DataError> {
         val result: Result<BooksSearchResponseDto, DataError.Network> = safeCall {
-            Log.d("karen", "getBooks: $q")
             client.get(BuildConfig.SEARCH_ENDPOINT) {
                 parameter("q", q)
             }
