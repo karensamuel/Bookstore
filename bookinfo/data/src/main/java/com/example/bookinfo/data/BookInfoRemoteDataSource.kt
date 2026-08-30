@@ -1,6 +1,5 @@
 package com.example.bookinfo.data
 
-import android.util.Log
 import com.example.bookinfo.data.remote.AuthorDto
 import com.example.bookinfo.data.remote.BookInfoDto
 import com.example.bookinfo.data.remote.toDomain
@@ -28,7 +27,6 @@ class BookInfoRemoteDataSource(
             client.get("${BuildConfig.BOOK_INFO_ENDPOINT}$bookId.json")
         }
         return result.map { bookInfoDto ->
-            Log.d("BookInfoRemoteDataSourcekaren", "getBookDetails: $bookInfoDto")
             bookInfoDto.toDomain()
         }
     }
@@ -40,13 +38,10 @@ class BookInfoRemoteDataSource(
         id: AuthorId
     ): Result<AuthorModel, DataError> {
         val result: Result<AuthorDto, DataError.Network> = safeCall {
-            Log.d("BookInfoRemoteDataSourcekaren", "getAuthorid: authors/${id.id}")
-            Log.d("AUtherurlkaren", "authors/${id.id}.json")
             client.get("authors/${id.id}.json")
         }
 
         return result.map { authorDto ->
-            Log.d("BookInfoRemoteDataSourcekaren", "getAuthor: $authorDto")
             authorDto.toDomain()
         }
     }

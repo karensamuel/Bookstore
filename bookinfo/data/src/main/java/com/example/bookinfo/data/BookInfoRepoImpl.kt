@@ -1,6 +1,5 @@
 package com.example.bookinfo.data
 
-import android.util.Log
 import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
 import com.example.core.domain.model.result.flatMap
@@ -25,19 +24,16 @@ class BookInfoRepoImpl(
                 var authors = persistentListOf<AuthorName>()
 
                 for (authorId in book.authors) {
-                    Log.d("BookInfoRepoImplkaren", "getBookDetails authorId: $authorId")
 
                     when (val result = remoteDataSource.getAuthor(AuthorId(authorId.id))) {
 
                         is Result.Success -> {
-                            Log.d("BookInfoRepoImplkaren", "getBookDetails auther name: ${result.data.name}")
                             authors = authors.add(
                                 AuthorName(result.data.name)
                             )
                         }
 
                         is Result.Error -> {
-                            Log.d("BookInfoRepoImplkaren", "getBookDetails error: ${result.error}")
                             return@flatMap Result.Error(result.error)
                         }
                     }

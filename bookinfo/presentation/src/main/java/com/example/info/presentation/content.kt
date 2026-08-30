@@ -1,6 +1,5 @@
 package com.example.info.presentation
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -68,7 +67,6 @@ fun BookDetailsScreen(
         }
 
         Spacer(modifier = Modifier.height(8.dp))
- Log.d("book info ui karen", "${book.book?.authors?.joinToString(", ")}")
         // Authors
         Text(
             text = "by ${book.book?.authors?.joinToString(", ")}",

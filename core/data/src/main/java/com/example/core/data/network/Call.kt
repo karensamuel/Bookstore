@@ -1,6 +1,5 @@
 package com.example.core.data.network
 
-import android.util.Log
 import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
 import io.ktor.client.call.body
@@ -36,7 +35,6 @@ suspend inline fun <reified T> safeCall(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        Log.d("safeCallkaren", "Request failed", e)
         currentCoroutineContext().ensureActive()
         Result.Error(DataError.Network.UNKNOWN)
     }

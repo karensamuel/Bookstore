@@ -1,7 +1,6 @@
 package com.example.searchbook.data
 
 
-import android.util.Log
 import com.example.core.data.network.safeCall
 import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
