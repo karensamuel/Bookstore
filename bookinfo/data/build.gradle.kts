@@ -40,6 +40,16 @@ android {
                 "COVER_SIZE",
                 "\"L\""
             )
+            buildConfigField(
+                "String",
+                "JSON_TYPE",
+                "\".json\""
+            )
+            buildConfigField(
+                "String",
+                "BOOK_AUTHOR_ENDPOINT",
+                "\"authors/\""
+            )
         }
         debug {
             buildConfigField(
@@ -56,6 +66,16 @@ android {
                 "String",
                 "COVER_SIZE",
                 "\"L\""
+            )
+            buildConfigField(
+                "String",
+                "JSON_TYPE",
+                "\".json\""
+            )
+            buildConfigField(
+                "String",
+                "BOOK_AUTHOR_ENDPOINT",
+                "\"authors/\""
             )
         }
     }

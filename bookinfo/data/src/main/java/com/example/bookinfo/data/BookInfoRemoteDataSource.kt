@@ -24,7 +24,7 @@ class BookInfoRemoteDataSource(
         bookId: String
     ): Result<BookInfoFirstModel, DataError> {
         val result: Result<BookInfoDto, DataError.Network> = safeCall {
-            client.get("${BuildConfig.BOOK_INFO_ENDPOINT}$bookId.json")
+            client.get("${BuildConfig.BOOK_INFO_ENDPOINT}$bookId${BuildConfig.JSON_TYPE}")
         }
         return result.map { bookInfoDto ->
             bookInfoDto.toDomain()
@@ -38,7 +38,7 @@ class BookInfoRemoteDataSource(
         id: AuthorId
     ): Result<AuthorModel, DataError> {
         val result: Result<AuthorDto, DataError.Network> = safeCall {
-            client.get("authors/${id.id}.json")
+            client.get("${BuildConfig.BOOK_AUTHOR_ENDPOINT}${id.id}${BuildConfig.JSON_TYPE}")
         }
 
         return result.map { authorDto ->
