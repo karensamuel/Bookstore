@@ -12,4 +12,6 @@ data class BookInfoModel(
 )
 
 @JvmInline
-value class AuthorName(val name: String)
+value class AuthorName(
+    val name: String,
+)

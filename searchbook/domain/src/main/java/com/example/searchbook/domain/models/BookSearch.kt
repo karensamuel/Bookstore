@@ -8,4 +8,6 @@ data class BookSearch(
 )
 
 @JvmInline
-value class AuthorId(val id: String)
+value class AuthorId(
+    val id: String,
+)
