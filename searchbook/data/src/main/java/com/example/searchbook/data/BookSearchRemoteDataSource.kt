@@ -1,7 +1,6 @@
 package com.example.searchbook.data
 
 
-import android.util.Log
 import com.example.core.data.network.safeCall
 import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
@@ -15,11 +14,11 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 class BookSearchRemoteDataSource(
-    private val client: HttpClient) : BookSearchDataSource {
+    private val client: HttpClient
+) : BookSearchDataSource {
 
     override suspend fun getBooks(q: String): Result<List<BookSearch>, DataError> {
         val result: Result<BooksSearchResponseDto, DataError.Network> = safeCall {
-            Log.d("karen", "getBooks: $q")
             client.get(BuildConfig.SEARCH_ENDPOINT) {
                 parameter("q", q)
             }

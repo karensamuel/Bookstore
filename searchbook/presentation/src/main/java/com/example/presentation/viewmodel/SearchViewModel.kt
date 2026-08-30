@@ -12,11 +12,11 @@ import com.example.searchbook.domain.usecases.SearchBookUseCase
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
 class SearchViewModel(
@@ -40,6 +40,7 @@ class SearchViewModel(
             }
         }
     }
+
     private suspend fun searchBooks(query: String) {
         if (query.isBlank()) {
 
@@ -49,21 +50,21 @@ class SearchViewModel(
             return
         }
 
-            _uiState.value = SearchUiState.Loading(query)
-            val result =searchUseCase.invoke(query)
-            result.onSuccess { books ->
+        _uiState.value = SearchUiState.Loading(query)
+        val result = searchUseCase.invoke(query)
+        result.onSuccess { books ->
 
-                val uiBooks = books.map { book -> toUiBook(book) }
-                _uiState.update {
+            val uiBooks = books.map { book -> toUiBook(book) }
+            _uiState.update {
 
-                    SearchUiState.Success(uiBooks.toImmutableList(), query)
-                }
+                SearchUiState.Success(uiBooks.toImmutableList(), query)
             }
-            result.onError { error ->
-                _uiState.update {
-                    SearchUiState.Error(error.toString(), query)
-                }
+        }
+        result.onError { error ->
+            _uiState.update {
+                SearchUiState.Error(error.toString(), query)
             }
+        }
 
 
     }

@@ -15,6 +15,7 @@ fun toUiBook(book: BookSearch): UiBookSearch {
     )
 
 }
-fun   toUiSearchAuther ( authors:List<AuthorId>): ImmutableList<String> {
+
+fun toUiSearchAuther(authors: List<AuthorId>): ImmutableList<String> {
     return authors.map { it.id }.toImmutableList()
 }

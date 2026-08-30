@@ -13,8 +13,8 @@ data class BookInfoDto(
     @SerialName("covers")
     val covers: List<Int> = emptyList(),
     @SerialName("first_publish_year") val firstPublishDate: String? = "",
-    @SerialName("description") val description: String? = ""
-)
+
+    )
 
 @Serializable
 data class WorkAuthorDto(

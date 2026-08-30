@@ -17,20 +17,20 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.presentation.BookList
-import com.example.presentation.model.BookIntent
 import com.example.book.presentation.viewmodel.BookViewModel
 import com.example.bookstore.ui.theme.BookStoreTheme
 import com.example.info.presentation.BookDetailsScreen
 import com.example.info.presentation.model.InfoIntent
 import com.example.info.presentation.viewmodel.InfoViewModel
+import com.example.presentation.BookList
+import com.example.presentation.model.BookIntent
+import com.example.presentation.model.BookUiState
+import com.example.presentation.model.SearchUiState
 import com.example.presentation.model.UiBookModel
 import com.example.presentation.viewmodel.SearchViewModel
 import com.example.searchbook.presentation.SearchRoute
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
-import  com.example.presentation.model.BookUiState
-import com.example.presentation.model.SearchUiState
 
 
 class MainActivity : ComponentActivity() {
@@ -54,7 +54,6 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
 
 
-
                     )
 
             }
@@ -69,7 +68,7 @@ fun NavGraph(
     navController: NavHostController,
 
 
-) {
+    ) {
 
     NavHost(
         navController = navController,
@@ -108,9 +107,9 @@ fun BookInfo(
             infoViewModel.onIntent(InfoIntent.onLoadPage(it))
         }
     }
-        BookDetailsScreen(
-            bookViewModel = infoViewModel
-        )
+    BookDetailsScreen(
+        bookViewModel = infoViewModel
+    )
 
 }
 
@@ -134,11 +133,12 @@ fun HomeRoute(
         SearchRoute(
             viewModel = searchViewModel
         )
-        when(bookState){
+        when (bookState) {
             is BookUiState.Error -> {}
             BookUiState.Loading -> {
                 CircularProgressIndicator()
             }
+
             is BookUiState.Success -> {
                 if (searchState.query.isBlank()) {
 
@@ -148,28 +148,28 @@ fun HomeRoute(
                     )
 
                 } else {
-                        when (searchState) {
-                            is SearchUiState.Error -> {}
-                            is SearchUiState.Loading -> {
-                                CircularProgressIndicator()
-                            }
-
-                            is SearchUiState.Success -> {
-                                val books = (searchState as SearchUiState.Success).books.map { book ->
-                                    UiBookModel(
-                                        id = book.id,
-                                        title = book.title,
-                                        authors = book.authors.toImmutableList(),
-                                        coverUrl = book.coverUrl
-                                    )
-                                }.toImmutableList()
-
-                                BookList(
-                                    bookModels = books.toImmutableList(),
-                                    onBookClick = onBookClick
-                                )
-                            }
+                    when (searchState) {
+                        is SearchUiState.Error -> {}
+                        is SearchUiState.Loading -> {
+                            CircularProgressIndicator()
                         }
+
+                        is SearchUiState.Success -> {
+                            val books = (searchState as SearchUiState.Success).books.map { book ->
+                                UiBookModel(
+                                    id = book.id,
+                                    title = book.title,
+                                    authors = book.authors.toImmutableList(),
+                                    coverUrl = book.coverUrl
+                                )
+                            }.toImmutableList()
+
+                            BookList(
+                                bookModels = books.toImmutableList(),
+                                onBookClick = onBookClick
+                            )
+                        }
+                    }
 
                 }
             }

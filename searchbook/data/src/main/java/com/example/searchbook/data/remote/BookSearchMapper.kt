@@ -9,13 +9,14 @@ fun BookSearchDto.toDomain(): BookSearch {
     return BookSearch(
         id = key ?: "",
         title = title ?: "",
-        authors =todataSearchauthors(authorName),
+        authors = todataSearchauthors(authorName),
         coverUrl = coverI?.let {
             "${BuildConfig.COVER_BASE_URL}${it}-${BuildConfig.COVER_SIZE}.jpg"
         }
     )
 }
-fun todataSearchauthors(authors: List<String>?): List<AuthorId>{
+
+fun todataSearchauthors(authors: List<String>?): List<AuthorId> {
     return authors?.map { AuthorId(it) } ?: emptyList()
 
 }

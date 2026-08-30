@@ -5,10 +5,10 @@ import com.example.core.domain.model.result.Result
 import com.example.core.domain.model.result.flatMap
 import com.example.info.domain.BookInfoDataSource
 import com.example.info.domain.BookInfoRepo
+import com.example.info.domain.model.AuthorId
 import com.example.info.domain.model.AuthorName
 import com.example.info.domain.model.BookInfoModel
 import com.example.info.domain.model.toBookInfo
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 
@@ -21,14 +21,16 @@ class BookInfoRepoImpl(
         return remoteDataSource.getBookDetails(bookId)
             .flatMap { book ->
 
-                val authors = persistentListOf<AuthorName>()
+                var authors = persistentListOf<AuthorName>()
 
                 for (authorId in book.authors) {
 
-                    when (val result = remoteDataSource.getAuthor(AuthorName(authorId.name))) {
+                    when (val result = remoteDataSource.getAuthor(AuthorId(authorId.id))) {
 
                         is Result.Success -> {
-                            authors.adding(AuthorName(result.data.name))
+                            authors = authors.add(
+                                AuthorName(result.data.name)
+                            )
                         }
 
                         is Result.Error -> {
@@ -38,7 +40,7 @@ class BookInfoRepoImpl(
                 }
 
                 Result.Success(
-                    toBookInfo(book,authors as ImmutableList<AuthorName>)
+                    toBookInfo(book, authors)
                 )
             }
     }
