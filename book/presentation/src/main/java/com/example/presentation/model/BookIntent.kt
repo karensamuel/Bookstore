@@ -1,4 +1,4 @@
-package com.example.book.presentation.model
+package com.example.presentation.model
 
 sealed interface BookIntent {
     data object LoadBooks : BookIntent

@@ -9,6 +9,8 @@ import com.example.core.domain.model.result.Result
 import com.example.core.domain.model.result.map
 import com.example.info.domain.BookInfoDataSource
 import com.example.info.domain.model.AuthorModel
+import com.example.info.domain.model.AuthorName
+import com.example.info.domain.model.BookInfoFirstModel
 import com.example.info.domain.model.BookInfoModel
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -19,7 +21,7 @@ class BookInfoRemoteDataSource(
 
     override suspend fun getBookDetails(
         bookId: String
-    ): Result<BookInfoModel, DataError> {
+    ): Result<BookInfoFirstModel, DataError> {
         val result: Result<BookInfoDto, DataError.Network> = safeCall {
             client.get("${BuildConfig.BOOK_INFO_ENDPOINT}$bookId.json")
         }
@@ -29,8 +31,10 @@ class BookInfoRemoteDataSource(
     }
 
 
+
+
     override suspend fun getAuthor(
-        id: String
+        id: AuthorName
     ): Result<AuthorModel, DataError> {
         val result: Result<AuthorDto, DataError.Network> = safeCall {
             client.get("$id.json")

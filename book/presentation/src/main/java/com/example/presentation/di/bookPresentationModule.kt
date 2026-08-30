@@ -1,4 +1,4 @@
-package com.example.book.presentation.di
+package com.example.presentation.di
 
 import com.example.book.presentation.viewmodel.BookViewModel
 import org.koin.core.module.dsl.viewModel

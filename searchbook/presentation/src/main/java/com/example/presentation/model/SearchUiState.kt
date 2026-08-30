@@ -3,9 +3,10 @@ package com.example.presentation.model
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
-data class SearchUiState(
-    val query: String = "",
-    val books: ImmutableList<UiBookSearch> = persistentListOf(),
-    val isLoading: Boolean = false,
-    val error: String? = null
-)
+sealed interface SearchUiState{
+    val query: String
+
+ data class  Loading(override val query: String) : SearchUiState
+    data class Success(val books: ImmutableList<UiBookSearch>, override val query: String) : SearchUiState
+    data class Error(val message: String, override val query: String) : SearchUiState
+}

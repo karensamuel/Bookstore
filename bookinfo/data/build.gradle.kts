@@ -79,4 +79,5 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
 
     implementation(libs.koin.android)
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.5.2")
 }

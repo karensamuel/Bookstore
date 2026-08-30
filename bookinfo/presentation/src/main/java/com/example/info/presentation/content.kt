@@ -87,10 +87,7 @@ fun BookDetailsScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        BookInfoRow(
-            label = "Published",
-            value = book.book?.firstPublishYear?.toString() ?: "Unknown"
-        )
+
 
         BookInfoRow(
             label = "Editions",

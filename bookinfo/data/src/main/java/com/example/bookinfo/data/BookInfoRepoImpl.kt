@@ -3,29 +3,32 @@ package com.example.bookinfo.data
 import com.example.core.domain.model.error.DataError
 import com.example.core.domain.model.result.Result
 import com.example.core.domain.model.result.flatMap
-import com.example.core.domain.model.result.map
 import com.example.info.domain.BookInfoDataSource
 import com.example.info.domain.BookInfoRepo
+import com.example.info.domain.model.AuthorName
 import com.example.info.domain.model.BookInfoModel
+import com.example.info.domain.model.toBookInfo
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 
 class BookInfoRepoImpl(
     private val remoteDataSource: BookInfoDataSource
 ) : BookInfoRepo {
     override suspend fun getBookDetails(bookId: String): Result<BookInfoModel, DataError> {
+
+
         return remoteDataSource.getBookDetails(bookId)
             .flatMap { book ->
 
-                val authors = mutableListOf<String>()
+                val authors = persistentListOf<AuthorName>()
 
                 for (authorId in book.authors) {
 
-                    when (val result = remoteDataSource.getAuthor(authorId)) {
+                    when (val result = remoteDataSource.getAuthor(AuthorName(authorId.name))) {
 
                         is Result.Success -> {
-                            println("AUTHOR RESULT karen: ${result.data}")
-                            println("AUTHOR NAME karen : ${result.data.name}")
-                            authors.add(result.data.name)
+                            authors.adding(AuthorName(result.data.name))
                         }
 
                         is Result.Error -> {
@@ -35,12 +38,8 @@ class BookInfoRepoImpl(
                 }
 
                 Result.Success(
-                    book.copy(
-                        authors = authors
-                    )
+                    toBookInfo(book,authors as ImmutableList<AuthorName>)
                 )
             }
-
     }
-
 }

@@ -11,34 +11,26 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.book.presentation.BookList
-import com.example.book.presentation.model.BookIntent
+import com.example.presentation.BookList
+import com.example.presentation.model.BookIntent
 import com.example.book.presentation.viewmodel.BookViewModel
 import com.example.bookstore.ui.theme.BookStoreTheme
-import com.example.core.domain.model.result.onError
-import com.example.core.domain.model.result.onSuccess
-import com.example.info.domain.BookInfoRepo
-import com.example.info.domain.model.BookInfoModel
 import com.example.info.presentation.BookDetailsScreen
 import com.example.info.presentation.model.InfoIntent
 import com.example.info.presentation.viewmodel.InfoViewModel
 import com.example.presentation.model.UiBookModel
 import com.example.presentation.viewmodel.SearchViewModel
 import com.example.searchbook.presentation.SearchRoute
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.koinViewModel
+import  com.example.presentation.model.BookUiState
+import com.example.presentation.model.SearchUiState
 
 
 class MainActivity : ComponentActivity() {
@@ -142,29 +134,46 @@ fun HomeRoute(
         SearchRoute(
             viewModel = searchViewModel
         )
+        when(bookState){
+            is BookUiState.Error -> {}
+            BookUiState.Loading -> {
+                CircularProgressIndicator()
+            }
+            is BookUiState.Success -> {
+                if (searchState.query.isBlank()) {
 
-        if (searchState.query.isBlank()) {
+                    BookList(
+                        bookModels = (bookState as BookUiState.Success).books,
+                        onBookClick = onBookClick
+                    )
 
-            BookList(
-                bookModels = bookState.books,
-                onBookClick = onBookClick
-            )
+                } else {
+                        when (searchState) {
+                            is SearchUiState.Error -> {}
+                            is SearchUiState.Loading -> {
+                                CircularProgressIndicator()
+                            }
 
-        } else {
+                            is SearchUiState.Success -> {
+                                val books = (searchState as SearchUiState.Success).books.map { book ->
+                                    UiBookModel(
+                                        id = book.id,
+                                        title = book.title,
+                                        authors = book.authors.toImmutableList(),
+                                        coverUrl = book.coverUrl
+                                    )
+                                }.toImmutableList()
 
-            val books = searchState.books.map { book ->
-                UiBookModel(
-                    id = book.id,
-                    title = book.title,
-                    authors = book.authors.toImmutableList(),
-                    coverUrl = book.coverUrl
-                )
-            }.toImmutableList()
+                                BookList(
+                                    bookModels = books.toImmutableList(),
+                                    onBookClick = onBookClick
+                                )
+                            }
+                        }
 
-            BookList(
-                bookModels = books.toImmutableList(),
-                onBookClick = onBookClick
-            )
+                }
+            }
         }
+
     }
 }

@@ -15,15 +15,11 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 class BookSearchRemoteDataSource(
-    private val client: HttpClient,
-
-    ) : BookSearchDataSource {
+    private val client: HttpClient) : BookSearchDataSource {
 
     override suspend fun getBooks(q: String): Result<List<BookSearch>, DataError> {
-        Log.d("book endpoint karen", "${BuildConfig.SEARCH_ENDPOINT}")
-        Log.d("BookSearch karen", "getBooks: $q")
-        println("QUERY = $q")
         val result: Result<BooksSearchResponseDto, DataError.Network> = safeCall {
+            Log.d("karen", "getBooks: $q")
             client.get(BuildConfig.SEARCH_ENDPOINT) {
                 parameter("q", q)
             }
@@ -31,7 +27,6 @@ class BookSearchRemoteDataSource(
 
         }
         return result.map { response ->
-            Log.d("BookSearch", "Docs: ${response.docs}")
             response.docs.map { it.toDomain() }
         }
 
