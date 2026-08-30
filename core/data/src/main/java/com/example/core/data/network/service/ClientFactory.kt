@@ -1,6 +1,5 @@
 package com.example.core.data.network.service
 
-import android.util.Log
 import com.example.core.data.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
@@ -25,7 +24,6 @@ fun createHttpClient(): HttpClient {
         }
 
         defaultRequest {
-            Log.d("Base URL karen", "createHttpClient: ${BuildConfig.BASE_URL}")
             url(BuildConfig.BASE_URL)
             contentType(ContentType.Application.Json)
         }

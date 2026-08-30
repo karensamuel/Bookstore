@@ -49,4 +49,8 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.koin.android)
+
 }

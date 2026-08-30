@@ -25,10 +25,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.domain.repo.model.BookModel
+import com.example.presentation.model.UiBookModel
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-fun BookItem(bookModel: BookModel, onClick: () -> Unit) {
+fun BookItem(bookModel: UiBookModel, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -105,10 +106,10 @@ fun BookItem(bookModel: BookModel, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 private fun BookItemPreview() {
-    val bookModel = BookModel(
+    val bookModel = UiBookModel(
         id = "1",
         title = "The Great Gatsby",
-        authors = listOf("F. Scott Fitzgerald"),
+        authors = persistentListOf("F. Scott Fitzgerald"),
         coverUrl = null,
     )
     BookItem(bookModel, onClick = {})

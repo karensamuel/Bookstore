@@ -2,9 +2,13 @@ package com.example.bookinfo.data.remote
 
 
 import com.example.bookinfo.data.BuildConfig
+import com.example.info.domain.model.AuthorId
+import com.example.info.domain.model.AuthorName
+import com.example.info.domain.model.BookInfoFirstModel
 import com.example.info.domain.model.BookInfoModel
+import kotlinx.collections.immutable.ImmutableList
 
-fun BookInfoDto.toDomain(authorNames: List<String>): BookInfoModel {
+fun BookInfoDto.toDomain(): BookInfoFirstModel {
 
 
     val firstPublishYear = firstPublishDate
@@ -15,12 +19,17 @@ fun BookInfoDto.toDomain(authorNames: List<String>): BookInfoModel {
         "${BuildConfig.COVER_BASE_URL}${coverId}-${BuildConfig.COVER_SIZE}.jpg"
     }
 
-    return BookInfoModel(
+    return BookInfoFirstModel(
         id = key?.removePrefix("/works/") ?: "",
         title = title,
-        authors = authorNames,
+        authors = changeToAuthorId(authors),
         coverUrl = coverUrl,
         firstPublishYear = firstPublishYear,
         editionCount = 0
     )
+}
+fun changeToAuthorId(authors: List<WorkAuthorDto>): ImmutableList<AuthorId> {
+    val authorIds = authors.map { it.author.key }
+    return authorIds.map {  AuthorId(it) } as ImmutableList<AuthorId>
+
 }

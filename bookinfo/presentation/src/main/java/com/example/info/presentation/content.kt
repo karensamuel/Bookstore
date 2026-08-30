@@ -1,5 +1,6 @@
 package com.example.info.presentation
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,18 +16,22 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.info.domain.model.BookInfoModel
+import com.example.info.presentation.viewmodel.InfoViewModel
 
 
 @Composable
 fun BookDetailsScreen(
-    book: BookInfoModel
+   bookViewModel: InfoViewModel
 ) {
+    val book by bookViewModel.uiState.collectAsStateWithLifecycle()
 
 
     Column(
@@ -43,7 +48,7 @@ fun BookDetailsScreen(
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
-                model = book.coverUrl,
+                model = book.book?.coverUrl,
                 contentDescription = "Book cover",
                 modifier = Modifier
                     .height(280.dp)
@@ -54,7 +59,7 @@ fun BookDetailsScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         // Title
-        book.title?.let {
+        book.book?.title?.let {
             Text(
                 text = it,
                 style = MaterialTheme.typography.headlineMedium,
@@ -63,10 +68,10 @@ fun BookDetailsScreen(
         }
 
         Spacer(modifier = Modifier.height(8.dp))
-
+ Log.d("book info", "${book.book?.authors?.joinToString(", ")}")
         // Authors
         Text(
-            text = "by ${book.authors.joinToString(", ")}",
+            text = "by ${book.book?.authors?.joinToString(", ")}",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -82,19 +87,16 @@ fun BookDetailsScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        BookInfoRow(
-            label = "Published",
-            value = book.firstPublishYear?.toString() ?: "Unknown"
-        )
+
 
         BookInfoRow(
             label = "Editions",
-            value = book.editionCount.toString()
+            value = book.book?.editionCount.toString()
         )
 
         BookInfoRow(
             label = "ID",
-            value = book.id
+            value = book.book?.id ?: " "
         )
     }
 }

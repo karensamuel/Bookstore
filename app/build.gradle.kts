@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.example.bookstore"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -48,6 +48,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.koin.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.kotlinx.collections.immutable)
+
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":book:domain"))

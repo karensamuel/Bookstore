@@ -1,17 +1,24 @@
-package com.example.book.presentation
+package com.example.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import com.example.domain.repo.model.BookModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.book.presentation.viewmodel.BookViewModel
 import com.example.presentation.components.BookItem
-
+import com.example.presentation.model.BookIntent
+import com.example.presentation.model.UiBookModel
+import kotlinx.collections.immutable.ImmutableList
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BookList(
-    bookModels: List<BookModel>, modifier: Modifier = Modifier, onBookClick: (String) -> Unit
+    modifier: Modifier = Modifier,
+    bookModels: ImmutableList<UiBookModel>,
+    onBookClick: (String) -> Unit
 ) {
     Column(modifier = modifier) {
         LazyColumn {
@@ -26,6 +33,14 @@ fun BookList(
 }
 
 @Composable
-fun BookListRoute(bookModels: List<BookModel>, modifier: Modifier = Modifier, onBookClick: (String) -> Unit) {
-    BookList(bookModels = bookModels, modifier = modifier, onBookClick = onBookClick)
+fun BookListRoute(
+    modifier: Modifier = Modifier,
+    viewModel: BookViewModel = koinViewModel(),
+    onBookClick: (String) -> Unit
+) {
+    val state = viewModel.uiState.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        viewModel.onIntent(BookIntent.LoadBooks)
+    }
+    BookList(bookModels = state.value as ImmutableList<UiBookModel>, modifier = modifier, onBookClick = onBookClick)
 }
