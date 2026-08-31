@@ -26,29 +26,28 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
+    // Android
+    androidUi()
+
     // Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    implementation("androidx.compose.material:material-icons-extended")
-    implementation(project(":searchbook:domain"))
+    compose()
 
-    implementation(project(":core:domain"))
-    implementation(libs.koin.android)
+    // Compose Icons
+    implementation(Dependencies.composeMaterialIconsExtended)
 
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.koin.androidx.compose)
-    implementation(libs.kotlinx.collections.immutable)
+    // Modules
+    searchBookDomain()
+    coreDomain()
 
+    // Koin
+    koin()
 
-    // Compose tooling
-    debugImplementation(libs.androidx.compose.ui.tooling)
+    // Lifecycle
+    implementation(Dependencies.lifecycleViewModelKtx)
+
+    // Immutable Collections
+    implementation(Dependencies.immutableCollections)
+
+    // Testing
+    test()
 }

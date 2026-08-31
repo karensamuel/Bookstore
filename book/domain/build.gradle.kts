@@ -12,6 +12,6 @@ kotlin {
     }
 }
 dependencies {
-    implementation(project(":core:domain"))
-    implementation(libs.kotlinx.collections.immutable)
-}
+    coreDomain()
+
+    implementation(Dependencies.immutableCollections)}

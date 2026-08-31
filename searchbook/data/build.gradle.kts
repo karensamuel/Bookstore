@@ -62,19 +62,18 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.material)
+    // Android
+    androidUi()
 
-    implementation(project(":searchbook:domain"))
-    implementation(project(":core:data"))
-    implementation(project(":core:domain"))
+    // Modules
+    searchBookDomain()
+    coreData()
+    coreDomain()
 
-    implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.content.negotiation)
+    // Ktor
+    ktor()
 
-    implementation(libs.koin.android)
+    // Koin
+    koin()
 
 }
