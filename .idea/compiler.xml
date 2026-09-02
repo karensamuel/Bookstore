@@ -3,11 +3,16 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
       <module name="BookStore.bookly.domain" target="21" />
+      <module name="BookStore.buildSrc" target="21" />
+      <module name="BookStore.buildSrc.main" target="21" />
+      <module name="BookStore.buildSrc.test" target="21" />
       <module name="BookStore.hom.presentation" target="21" />
       <module name="BookStore.homee" target="21" />
       <module name="BookStore.info.presentation" target="21" />
       <module name="BookStore.search.domain" target="21" />
       <module name="BookStore.searches.presentation" target="21" />
+      <module name="build-logic.convention.main" target="21" />
+      <module name="build-logic.convention.test" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>
