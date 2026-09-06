@@ -1,45 +1,9 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.dev.karen.android.core)
 }
 
 android {
     namespace = "com.example.core.data"
-    compileSdk {
-        version = release(37)
-    }
-
-    buildFeatures {
-        buildConfig = true
-    }
-
-    defaultConfig {
-        minSdk = 24
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    buildFeatures {
-        buildConfig = true
-    }
-
-    buildTypes {
-        release {
-            buildConfigField(
-                "String",
-                "BASE_URL",
-                "\"https://openlibrary.org/\""
-            )
-        }
-        debug {
-            buildConfigField(
-                "String",
-                "BASE_URL",
-                "\"https://openlibrary.org/\""
-            )
-        }
-    }
 }
 
 dependencies {
@@ -54,10 +18,7 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(project(":core:domain"))
-    implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.koin.android)
 
 }

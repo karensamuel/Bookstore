@@ -2,9 +2,8 @@ import com.android.build.api.dsl.LibraryExtension
 import ext.configureKotlin
 import ext.version
 import ext.versionCatalog
-import org.gradle.api.Project
 import org.gradle.api.Plugin
-import kotlin.jvm.java
+import org.gradle.api.Project
 
 class AndroidLibraryConventionPlugin: Plugin<Project> {
     override fun apply(target: Project) {
@@ -19,7 +18,9 @@ class AndroidLibraryConventionPlugin: Plugin<Project> {
                  testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
              }
+
          }
+
          configureKotlin()
      }
     }

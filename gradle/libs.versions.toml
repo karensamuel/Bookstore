@@ -6,22 +6,22 @@ junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.11.0"
 activityCompose = "1.13.0"
-kotlin = "2.2.10"
+kotlin = "2.4.10"
 composeBom = "2026.02.01"
-jetbrainsKotlinJvm = "2.2.10"
-appcompat = "1.6.1"
-material = "1.10.0"
+appcompat = "1.7.1"
+material = "1.13.0"
 navigationCompose = "2.9.8"
 navigationRuntimeKtx = "2.9.8"
-ktor = "3.2.3"
-koin = "4.1.1"
+ktor = "3.5.2"
+koin = "4.2.2"
 coil = "2.7.0"
-kotlinxImmutable = "0.4.0"
+kotlinxImmutable = "0.5.2"
 compileSdk = "37"
 minSdk = "24"
-
+targetSdk = "37"
 [libraries]
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -54,9 +54,16 @@ kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collec
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 #convention Plugins
 dev-karen-android-library ={id ="dev.karen.android.library",version="unspecified"}
+dev-karen-android-library-compose = { id = "dev.karen.android.library.compose", version = "unspecified" }
+dev-karen-android-application = { id = "dev.karen.android.application", version = "unspecified" }
+dev-karen-android-application-compose = { id = "dev.karen.android.application.compose", version = "unspecified" }
+dev-karen-jvm-library = { id = "dev.karen.jvm.library", version = "unspecified" }
+dev-karen-android-searchbook ={id ="dev.karen.android.searchbook",version="unspecified"}
+dev-karen-android-core ={id ="dev.karen.android.core",version="unspecified"}
+dev-karen-android-book ={id ="dev.karen.android.book",version="unspecified"}
+dev-karen-android-bookinfo ={id ="dev.karen.android.bookInfo",version="unspecified"}

@@ -1,54 +1,10 @@
 plugins {
-    alias(libs.plugins.dev.karen.android.library)
+    alias(libs.plugins.dev.karen.android.searchbook)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.example.searchbook.data"
-
-
-
-    buildFeatures {
-        buildConfig = true
-    }
-
-    buildTypes {
-        release {
-            buildConfigField(
-                "String",
-                "SEARCH_ENDPOINT",
-                "\"search.json\""
-            )
-            buildConfigField(
-                "String",
-                "COVER_BASE_URL",
-                "\"https://covers.openlibrary.org/b/id/\""
-            )
-            buildConfigField(
-                "String",
-                "COVER_SIZE",
-                "\"M\""
-            )
-        }
-        debug {
-            buildConfigField(
-                "String",
-                "SEARCH_ENDPOINT",
-                "\"search.json\""
-            )
-            buildConfigField(
-                "String",
-                "COVER_BASE_URL",
-                "\"https://covers.openlibrary.org/b/id/\""
-            )
-            buildConfigField(
-                "String",
-                "COVER_SIZE",
-                "\"M\""
-            )
-        }
-    }
-
 }
 
 dependencies {
