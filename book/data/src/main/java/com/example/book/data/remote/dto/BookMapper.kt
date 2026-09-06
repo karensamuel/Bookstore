@@ -8,7 +8,8 @@ fun BookDto.toDomain(): BookModel {
     return BookModel(
         id = key,
         title = title,
-        authors = authorName ?: emptyList(), coverUrl = coverI?.let {
+        authors = authorName ?: emptyList(),
+        coverUrl = coverI?.let {
             "${BuildConfig.COVER_BASE_URL}${it}-${BuildConfig.COVER_SIZE}.jpg"
         }
 
