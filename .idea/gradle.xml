@@ -34,6 +34,10 @@
             <option value="$PROJECT_DIR$/core/data" />
             <option value="$PROJECT_DIR$/core/domain" />
             <option value="$PROJECT_DIR$/core/presentation" />
+            <option value="$PROJECT_DIR$/history" />
+            <option value="$PROJECT_DIR$/history/data" />
+            <option value="$PROJECT_DIR$/history/domain" />
+            <option value="$PROJECT_DIR$/history/presentation" />
             <option value="$PROJECT_DIR$/searchbook" />
             <option value="$PROJECT_DIR$/searchbook/data" />
             <option value="$PROJECT_DIR$/searchbook/domain" />
