@@ -53,6 +53,9 @@ dependencies {
     implementation(project(":searchbook:data"))
     implementation(project(":bookinfo:domain"))
     implementation(project(":bookinfo:data"))
+    implementation(project(":history:presentation"))
+    implementation(project(":history:domain"))
+    implementation(project(":history:data"))
 }
 
 

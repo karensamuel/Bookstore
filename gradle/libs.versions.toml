@@ -21,8 +21,13 @@ minSdk = "24"
 targetSdk = "37"
 mockk = "1.13.13"
 kotlinxCoroutines = "1.10.2"
+ksp = "2.3.11"
+room = "2.8.4"
 [libraries]
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,10 +63,12 @@ ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 #convention Plugins
 dev-karen-android-library ={id ="dev.karen.android.library",version="unspecified"}
 dev-karen-android-library-compose = { id = "dev.karen.android.library.compose", version = "unspecified" }
@@ -72,3 +79,4 @@ dev-karen-android-searchbook ={id ="dev.karen.android.searchbook",version="unspe
 dev-karen-android-core ={id ="dev.karen.android.core",version="unspecified"}
 dev-karen-android-book ={id ="dev.karen.android.book",version="unspecified"}
 dev-karen-android-bookinfo ={id ="dev.karen.android.bookInfo",version="unspecified"}
+dev-karen-android-bookhistory ={id ="dev.karen.android.bookHistory",version="unspecified"}

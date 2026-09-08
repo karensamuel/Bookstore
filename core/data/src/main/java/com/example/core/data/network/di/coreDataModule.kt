@@ -4,7 +4,7 @@ import com.example.core.data.network.service.createHttpClient
 import io.ktor.client.HttpClient
 import org.koin.dsl.module
 
-val coreDataModule = module {
+val coreRemoteDataModule = module {
 
     single<HttpClient> {
         createHttpClient()

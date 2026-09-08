@@ -1,23 +1,10 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.ksp)
+alias(libs.plugins.dev.karen.android.bookhistory)
 }
 
 android {
     namespace = "com.example.history.data"
-    compileSdk {
-        version = release(37)
-    }
-
-    defaultConfig {
-        minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
 }
 
 dependencies {
@@ -27,4 +14,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    implementation(libs.kotlinx.collections.immutable)
+
+    //room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    //koin
+    implementation(libs.koin.android)
+
+    implementation(project(":history:domain"))
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
 }

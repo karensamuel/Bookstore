@@ -46,6 +46,10 @@ gradlePlugin {
             id = "dev.karen.android.bookInfo"
             implementationClass = "moduleplugins.BookInfoConventionPlugin"
         }
+        register("bookHistory") {
+            id = "dev.karen.android.bookHistory"
+            implementationClass = "moduleplugins.BookHistoryConventionPlugin"
+        }
 
     }
 }
