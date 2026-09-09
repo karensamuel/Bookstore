@@ -22,6 +22,7 @@ fun BookstoreNavigation(modifier: Modifier, backStack: NavBackStack<NavKey>) {
         entryProvider = entryProvider {
             entry<BookstoreRoute.Home> {
                 HomeRouteScreen(
+                    modifier = modifier,
                     onBookClick = { book ->
                         val historyBook = BookHistoryModel(
                             id = book.id,
@@ -42,6 +43,7 @@ fun BookstoreNavigation(modifier: Modifier, backStack: NavBackStack<NavKey>) {
             }
             entry<BookstoreRoute.History> {
                 HistoryRouteScreen(
+                    modifier = modifier,
                     onBookClick = { book ->
                         val historyBook = BookHistoryModel(
                             id = book.id,
@@ -62,6 +64,7 @@ fun BookstoreNavigation(modifier: Modifier, backStack: NavBackStack<NavKey>) {
             }
             entry<BookstoreRoute.BookInfo> {
                 BookInfoRouteScreen(
+                    modifier = modifier,
                     bookId = it.bookId
                 )
             }

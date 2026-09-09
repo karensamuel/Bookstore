@@ -21,6 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun BookInfoRouteScreen(
     bookId: String,
+    modifier: Modifier,
 ) {
     val infoViewModel: InfoViewModel = koinViewModel()
     LaunchedEffect(bookId) {

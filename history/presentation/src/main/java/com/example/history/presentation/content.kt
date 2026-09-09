@@ -42,14 +42,7 @@ fun HistoryScreen(
             .padding(horizontal = 16.dp)
     ) {
 
-        Text(
-            text = "History",
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(
-                top = 24.dp,
-                bottom = 16.dp
-            )
-        )
+
 
         if (books.isEmpty()) {
 

@@ -38,9 +38,12 @@ fun HomeRouteScreen(
         bookViewModel.onIntent(BookIntent.LoadBooks)
     }
 
-    Column {
+    Column (
+        modifier = modifier.fillMaxSize()
+    ){
 
         SearchRoute(
+
             viewModel = searchViewModel
         )
         when (bookState) {

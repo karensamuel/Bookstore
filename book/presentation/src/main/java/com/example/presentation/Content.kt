@@ -36,19 +36,3 @@ fun BookList(
     }
 }
 
-@Composable
-fun BookListRoute(
-    modifier: Modifier = Modifier,
-    viewModel: BookViewModel = koinViewModel(),
-    onBookClick: (UiBookModel) -> Unit
-) {
-    val state = viewModel.uiState.collectAsStateWithLifecycle()
-    LaunchedEffect(Unit) {
-        viewModel.onIntent(BookIntent.LoadBooks)
-    }
-    BookList(
-        bookModels = state.value as ImmutableList<UiBookModel>,
-        modifier = modifier,
-        onBookClick = onBookClick
-    )
-}
