@@ -3,6 +3,7 @@ package com.example.presentation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -20,8 +21,11 @@ fun BookList(
     bookModels: ImmutableList<UiBookModel>,
     onBookClick: (UiBookModel) -> Unit
 ) {
+    val lazyListState = rememberLazyListState()
     Column(modifier = modifier) {
-        LazyColumn {
+        LazyColumn(
+            state = lazyListState
+        ) {
             items(bookModels) { book ->
                 BookItem(
                     book, onClick = {

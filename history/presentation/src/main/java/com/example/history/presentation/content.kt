@@ -8,21 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.history.presentation.components.HistoryBookCard
-import com.example.history.presentation.model.BookHistoryIntent
 import com.example.history.presentation.model.BookHistoryUiState
 import com.example.history.presentation.model.UiBookHistoryModel
 import com.example.history.presentation.viewmodel.BookHistoryViewModel
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
 
@@ -64,10 +60,13 @@ fun HistoryScreen(
             )
 
         } else {
+            val listState = rememberLazyListState()
 
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(bottom = 16.dp)
+                contentPadding = PaddingValues(bottom = 16.dp),
+                state = listState
+
             ) {
                 items(
                     items = books,

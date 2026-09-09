@@ -8,7 +8,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import com.example.bookstore.navigation.BookstoreRoute
@@ -23,7 +22,7 @@ fun BottomNavigationBar(backStack: NavBackStack<NavKey>) {
             selected = currentDestination == BookstoreRoute.Home,
             onClick = {
                 if (currentDestination != BookstoreRoute.Home) {
-                    backStack.clear()
+
                     backStack.add(BookstoreRoute.Home)
                 }
             },
@@ -42,7 +41,7 @@ fun BottomNavigationBar(backStack: NavBackStack<NavKey>) {
             selected = currentDestination == BookstoreRoute.History,
             onClick = {
                 if (currentDestination != BookstoreRoute.History) {
-                    backStack.clear()
+
                     backStack.add(BookstoreRoute.History)
                 }
             },

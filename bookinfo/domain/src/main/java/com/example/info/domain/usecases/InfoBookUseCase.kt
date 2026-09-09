@@ -8,5 +8,6 @@ import com.example.info.domain.model.BookInfoModel
 class InfoBookUseCase(
     private val repository: BookInfoRepo,
 ) {
-    suspend operator fun invoke(bookId: String): Result<BookInfoModel, DataError> = repository.getBookDetails(bookId)
+    suspend operator fun invoke(bookId: String): Result<BookInfoModel, DataError> =
+        repository.getBookDetails(bookId)
 }

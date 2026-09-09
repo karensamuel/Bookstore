@@ -25,7 +25,13 @@ class BookViewModel(
 
     fun onIntent(intent: BookIntent) {
         when (intent) {
-            BookIntent.LoadBooks -> loadBooks()
+            BookIntent.LoadBooks -> {
+                if (_uiState.value is BookUiState.Success) {
+                    return
+                }
+
+                loadBooks()
+            }
         }
     }
 

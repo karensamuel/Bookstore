@@ -8,5 +8,6 @@ import com.example.searchbook.domain.models.BookSearch
 class SearchBookUseCase(
     private val repository: SearchRepo,
 ) {
-    suspend operator fun invoke(query: String): Result<List<BookSearch>, DataError> = repository.searchBooks(query)
+    suspend operator fun invoke(query: String): Result<List<BookSearch>, DataError> =
+        repository.searchBooks(query)
 }

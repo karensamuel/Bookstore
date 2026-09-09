@@ -1,7 +1,6 @@
 package moduleplugins
 
 import buildconfigs.configureBookHistoryBuildConfig
-import buildconfigs.configureBookInfoBuildConfig
 import buildconfigs.configureSharedBuildConfig
 import com.android.build.api.dsl.LibraryExtension
 import ext.versionCatalog
@@ -9,7 +8,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-class BookHistoryConventionPlugin: Plugin<Project> {
+class BookHistoryConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {

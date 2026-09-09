@@ -1,5 +1,3 @@
-
-
 package com.example.core.data.local
 
 import com.example.core.domain.model.error.DataError

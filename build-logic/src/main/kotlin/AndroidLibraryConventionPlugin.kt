@@ -5,23 +5,23 @@ import ext.versionCatalog
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class AndroidLibraryConventionPlugin: Plugin<Project> {
+class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-     with(target){
-         pluginManager.apply("com.android.library")
-         val libs = versionCatalog()
-         extensions.configure(LibraryExtension::class.java){
-             compileSdk = libs.version("compileSdk").toInt()
-             defaultConfig{
-                 minSdk = libs.version("minSdk").toInt()
+        with(target) {
+            pluginManager.apply("com.android.library")
+            val libs = versionCatalog()
+            extensions.configure(LibraryExtension::class.java) {
+                compileSdk = libs.version("compileSdk").toInt()
+                defaultConfig {
+                    minSdk = libs.version("minSdk").toInt()
 
-                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-             }
+                }
 
-         }
+            }
 
-         configureKotlin()
-     }
+            configureKotlin()
+        }
     }
 }

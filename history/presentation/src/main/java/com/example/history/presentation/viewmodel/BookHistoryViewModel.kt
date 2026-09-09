@@ -10,7 +10,6 @@ import com.example.history.domain.usecases.BookGetHistoryUseCase
 import com.example.history.presentation.model.BookHistoryIntent
 import com.example.history.presentation.model.BookHistoryUiState
 import com.example.history.presentation.model.toUiBookHistory
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,7 +25,12 @@ class BookHistoryViewModel(
     val uiState: StateFlow<BookHistoryUiState> = _uiState.asStateFlow()
     fun onIntent(intent: BookHistoryIntent) {
         when (intent) {
-            BookHistoryIntent.LoadBooks -> loadBooks()
+            BookHistoryIntent.LoadBooks -> {
+                if (_uiState.value is BookHistoryUiState.Success) {
+                    return
+                }
+                loadBooks()
+            }
             is BookHistoryIntent.AddBook -> addBook(intent.book)
         }
     }

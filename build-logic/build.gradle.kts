@@ -2,15 +2,15 @@ plugins { //enable writting kotlin with pugin language
     `kotlin-dsl`
 }
 group = "com.example.convention.buildLogic"
-dependencies{
+dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
 }
 gradlePlugin {
-    plugins{
-        register("androidLibrary"){
+    plugins {
+        register("androidLibrary") {
             id = "dev.karen.android.library"
-            implementationClass ="AndroidLibraryConventionPlugin"
+            implementationClass = "AndroidLibraryConventionPlugin"
         }
 
         register("androidLibraryCompose") {
