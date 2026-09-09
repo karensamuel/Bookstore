@@ -8,15 +8,24 @@ import com.example.history.data.local.HistoryAppDatabase
 import com.example.history.data.local.HistoryBookDao
 import com.example.history.domain.BookHistoryDataSource
 import com.example.history.domain.BookHistoryRepo
+import com.example.history.domain.usecases.BookAddHistoryUseCase
+import com.example.history.domain.usecases.BookGetHistoryUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val bookHistoryDataModule = module{
+    factory<BookAddHistoryUseCase> {
+        BookAddHistoryUseCase(get())
+    }
+
+    factory<BookGetHistoryUseCase> {
+        BookGetHistoryUseCase(get())
+    }
 
     single<HistoryAppDatabase> {
         Room.databaseBuilder<HistoryAppDatabase>(
             androidContext(),
-            "database-name"
+            "history.db"
         )
             .setDriver(AndroidSQLiteDriver())
             .build()

@@ -18,14 +18,14 @@ import org.koin.androidx.compose.koinViewModel
 fun BookList(
     modifier: Modifier = Modifier,
     bookModels: ImmutableList<UiBookModel>,
-    onBookClick: (String) -> Unit
+    onBookClick: (UiBookModel) -> Unit
 ) {
     Column(modifier = modifier) {
         LazyColumn {
             items(bookModels) { book ->
                 BookItem(
                     book, onClick = {
-                        onBookClick(book.id)
+                        onBookClick(book)
                     })
             }
         }
@@ -36,7 +36,7 @@ fun BookList(
 fun BookListRoute(
     modifier: Modifier = Modifier,
     viewModel: BookViewModel = koinViewModel(),
-    onBookClick: (String) -> Unit
+    onBookClick: (UiBookModel) -> Unit
 ) {
     val state = viewModel.uiState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {

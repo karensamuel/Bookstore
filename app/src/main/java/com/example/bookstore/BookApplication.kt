@@ -7,6 +7,7 @@ import com.example.book.presentation.di.bookSearchPresentationModule
 import com.example.bookinfo.data.di.bookInfoModule
 import com.example.core.data.network.di.coreRemoteDataModule
 import com.example.history.data.di.bookHistoryDataModule
+import com.example.history.presentation.di.BookHistoryPresntationModule
 import com.example.info.presentation.di.bookInfoPresentationModule
 import com.example.presentation.di.bookPresentationModule
 import com.example.searchbook.data.di.bookSearchModule
@@ -29,7 +30,8 @@ class BookApplication : Application() {
                 bookPresentationModule,
                 bookSearchPresentationModule,
                 bookInfoPresentationModule,
-                bookHistoryDataModule
+                bookHistoryDataModule,
+                BookHistoryPresntationModule
             )
         }
     }

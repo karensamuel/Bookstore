@@ -7,9 +7,9 @@ import androidx.room.Query
 @Dao
 interface HistoryBookDao {
     @Query("SELECT * FROM historybookentity")
-    fun getAll(): List<HistoryBookEntity>
+    suspend fun getAll(): List<HistoryBookEntity>
 
     @Insert
-    fun insertBook(book: HistoryBookEntity)
+   suspend fun insertBook(book: HistoryBookEntity)
 
 }

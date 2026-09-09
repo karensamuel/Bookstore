@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.dev.karen.android.application.compose)
+    alias(libs.plugins.kotlin.serialization)
 
 }
 
@@ -41,6 +42,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.koin.androidx.compose)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.navigation3.ui)
 
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
