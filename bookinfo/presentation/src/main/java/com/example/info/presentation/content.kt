@@ -15,21 +15,18 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.example.info.presentation.viewmodel.InfoViewModel
+import com.example.info.presentation.model.UiBookInfoModel
 
 
 @Composable
 fun BookDetailsScreen(
-    bookViewModel: InfoViewModel
+    book: UiBookInfoModel
 ) {
-    val book by bookViewModel.uiState.collectAsStateWithLifecycle()
 
 
     Column(
@@ -46,7 +43,7 @@ fun BookDetailsScreen(
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
-                model = book.book?.coverUrl,
+                model = book.coverUrl,
                 contentDescription = "Book cover",
                 modifier = Modifier
                     .height(280.dp)
@@ -57,7 +54,7 @@ fun BookDetailsScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         // Title
-        book.book?.title?.let {
+        book.title?.let {
             Text(
                 text = it,
                 style = MaterialTheme.typography.headlineMedium,
@@ -68,7 +65,7 @@ fun BookDetailsScreen(
         Spacer(modifier = Modifier.height(8.dp))
         // Authors
         Text(
-            text = "by ${book.book?.authors?.joinToString(", ")}",
+            text = "by ${book.authors?.joinToString(", ")}",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -88,12 +85,12 @@ fun BookDetailsScreen(
 
         BookInfoRow(
             label = "Editions",
-            value = book.book?.editionCount.toString()
+            value = book.editionCount.toString()
         )
 
         BookInfoRow(
             label = "ID",
-            value = book.book?.id ?: " "
+            value = book.id ?: " "
         )
     }
 }

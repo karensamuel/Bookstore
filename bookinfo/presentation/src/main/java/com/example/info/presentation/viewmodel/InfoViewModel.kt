@@ -11,12 +11,13 @@ import com.example.info.presentation.model.bookInfoMapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class InfoViewModel(
     private val infoBookUseCase: InfoBookUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(InfoUiState())
+    private val _uiState = MutableStateFlow<InfoUiState>(InfoUiState.Loading)
     val uiState: StateFlow<InfoUiState> = _uiState.asStateFlow()
     fun onIntent(intent: InfoIntent) {
         when (intent) {
@@ -29,14 +30,22 @@ class InfoViewModel(
 
     fun loadPage(bookId: String) {
         viewModelScope.launch {
+            _uiState.update {
+                InfoUiState.Loading
+            }
             val result = infoBookUseCase.invoke(bookId)
 
             result.onSuccess { book ->
-                val uiBook = bookInfoMapper(book)
-                _uiState.value = _uiState.value.copy(book = uiBook, isLoading = false, error = null)
+
+                _uiState.update {
+                    val uiBook = bookInfoMapper(book)
+                    InfoUiState.Success(uiBook)
+                }
             }
             result.onError { error ->
-                _uiState.value = _uiState.value.copy(isLoading = false, error = error.toString())
+                _uiState.update {
+                    InfoUiState.Error("$error")
+                }
             }
         }
     }

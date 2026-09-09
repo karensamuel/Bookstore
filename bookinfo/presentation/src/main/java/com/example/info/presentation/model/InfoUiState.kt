@@ -1,8 +1,8 @@
 package com.example.info.presentation.model
 
-data class InfoUiState(
-    val book: UiBookInfoModel? = null,
-    val isLoading: Boolean = false,
-    val error: String? = null
+sealed interface InfoUiState{
+    object Loading : InfoUiState
+    data class Success(val book: UiBookInfoModel) : InfoUiState
+    data class Error(val message: String) : InfoUiState
+}
 
-)

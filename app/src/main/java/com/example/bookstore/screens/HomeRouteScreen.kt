@@ -1,10 +1,15 @@
 package com.example.bookstore.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.book.presentation.viewmodel.BookViewModel
@@ -39,9 +44,35 @@ fun HomeRouteScreen(
             viewModel = searchViewModel
         )
         when (bookState) {
-            is BookUiState.Error -> {}
+            is BookUiState.Error -> {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Something went wrong"
+                    )
+
+                    Button(
+                        onClick = {
+                            bookViewModel.onIntent(
+                                BookIntent.LoadBooks
+                            )
+                        }
+                    ) {
+                        Text("Try Again")
+                    }
+                }
+            }
             BookUiState.Loading -> {
-                CircularProgressIndicator()
+                Column (
+                    verticalArrangement= Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = modifier.fillMaxSize()
+                ){
+                    CircularProgressIndicator()
+                }
             }
 
             is BookUiState.Success -> {
@@ -56,7 +87,13 @@ fun HomeRouteScreen(
                     when (searchState) {
                         is SearchUiState.Error -> {}
                         is SearchUiState.Loading -> {
-                            CircularProgressIndicator()
+                            Column (
+                                verticalArrangement= Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = modifier.fillMaxSize()
+                            ){
+                                CircularProgressIndicator()
+                            }
                         }
 
                         is SearchUiState.Success -> {
